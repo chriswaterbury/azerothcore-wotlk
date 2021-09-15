@@ -559,8 +559,8 @@ public:
                                     me->CastSpell(target, SPELL_MAGNETIC_PULL, true);
                                 }
                                 DoAction(ACTION_MAGNETIC_PULL);
-                                me->SetControlled(true, UNIT_STATE_ROOT);
-                                feugen->SetControlled(false, UNIT_STATE_ROOT);
+                                me->SetControlled(false, UNIT_STATE_ROOT);
+                                feugen->SetControlled(true, UNIT_STATE_ROOT);
                             } else {
                                 feugen->getThreatMgr().modifyThreatPercent(tankFeugen, -100);
                                 feugen->AddThreat(tankStalagg, threatFeugen);
@@ -573,8 +573,8 @@ public:
                                     feugen->CastSpell(target, SPELL_MAGNETIC_PULL, true);
                                 }
                                 DoAction(ACTION_MAGNETIC_PULL);
-                                feugen->SetControlled(true, UNIT_STATE_ROOT);
-                                me->SetControlled(false, UNIT_STATE_ROOT);
+                                feugen->SetControlled(false, UNIT_STATE_ROOT);
+                                me->SetControlled(true, UNIT_STATE_ROOT);
                             }
                         }
                     }
@@ -591,14 +591,15 @@ public:
                           if (me->GetHomePosition().IsInDist(target, 28) && me->IsInCombat())
                           {
                               active = true;
+                              break;
                           }
                       }
                       if (active) {
-                          me->SetControlled(false, UNIT_STATE_ROOT);
-                          me->SetReactState(REACT_AGGRESSIVE);
-                      } else {
                           me->SetControlled(true, UNIT_STATE_ROOT);
-                          me->SetReactState(REACT_PASSIVE);
+                          // me->SetReactState(REACT_AGGRESSIVE);
+                      } else {
+                          me->SetControlled(false, UNIT_STATE_ROOT);
+                          // me->SetReactState(REACT_PASSIVE);
                       }
                     }
                     events.RepeatEvent(500);

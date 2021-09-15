@@ -199,7 +199,7 @@ public:
                             }
                         }
                     }
-                    events.RepeatEvent(40000);
+                    events.RepeatEvent(50000);
                     break;
             }
             DoMeleeAttackIfReady();
