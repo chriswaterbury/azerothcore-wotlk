@@ -212,9 +212,12 @@ public:
         if (targetType == SELECT_TARGET_RANDOM_NON_HEALER)
             targetList.remove_if([](auto val)
             {
-              Unit* p = *val;
-              uint8 maxIndex = p->GetMostPointsTalentTree();
-              return ((p->getClass() == CLASS_DRUID && maxIndex == 2) || (p->getClass() == CLASS_PALADIN && maxIndex == 0) || (p->getClass() == CLASS_PRIEST && maxIndex <= 1) || (p->getClass() == CLASS_SHAMAN && maxIndex == 2))
+              if (Player* p = (*val)->ToPlayer())
+              {
+                  uint8 maxIndex = p->GetMostPointsTalentTree();
+                  return ((p->getClass() == CLASS_DRUID && maxIndex == 2) || (p->getClass() == CLASS_PALADIN && maxIndex == 0) || (p->getClass() == CLASS_PRIEST && maxIndex <= 1) || (p->getClass() == CLASS_SHAMAN && maxIndex == 2));
+              }
+              return false;
             })
 
         switch (targetType)
