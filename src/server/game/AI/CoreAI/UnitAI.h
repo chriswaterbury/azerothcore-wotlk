@@ -219,7 +219,7 @@ public:
                   return ((p->getClass() == CLASS_DRUID && maxIndex == 2) || (p->getClass() == CLASS_PALADIN && maxIndex == 0) || (p->getClass() == CLASS_PRIEST && maxIndex <= 1) || (p->getClass() == CLASS_SHAMAN && maxIndex == 2));
               }
               return false;
-            })
+            });
 
         switch (targetType)
         {
