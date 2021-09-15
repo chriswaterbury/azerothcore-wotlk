@@ -594,10 +594,10 @@ public:
                           }
                       }
                       if (active) {
-                          me->SetControlled(true, UNIT_STATE_ROOT);
+                          me->SetControlled(false, UNIT_STATE_ROOT);
                           me->SetReactState(REACT_AGGRESSIVE);
                       } else {
-                          me->SetControlled(false, UNIT_STATE_ROOT);
+                          me->SetControlled(true, UNIT_STATE_ROOT);
                           me->SetReactState(REACT_PASSIVE);
                       }
                     }
