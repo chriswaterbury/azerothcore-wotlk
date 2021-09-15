@@ -559,7 +559,7 @@ public:
                                     me->CastSpell(target, SPELL_MAGNETIC_PULL, true);
                                 }
                                 DoAction(ACTION_MAGNETIC_PULL);
-                                me->SetControlled(true);
+                                me->SetControlled(true, UNIT_STATE_ROOT);
                                 feugen->SetControlled(false, UNIT_STATE_ROOT);
                             } else {
                                 feugen->getThreatMgr().modifyThreatPercent(tankFeugen, -100);
@@ -573,7 +573,7 @@ public:
                                     feugen->CastSpell(target, SPELL_MAGNETIC_PULL, true);
                                 }
                                 DoAction(ACTION_MAGNETIC_PULL);
-                                feugen->SetControlled(true);
+                                feugen->SetControlled(true, UNIT_STATE_ROOT);
                                 me->SetControlled(false, UNIT_STATE_ROOT);
                             }
                         }
@@ -594,10 +594,10 @@ public:
                           }
                       }
                       if (active) {
-                          me->SetControlled(false, UNIT_STATE_ROOT);
+                          me->SetControlled(true, UNIT_STATE_ROOT);
                           me->SetReactState(REACT_AGGRESSIVE);
                       } else {
-                          me->SetControlled(true);
+                          me->SetControlled(false, UNIT_STATE_ROOT);
                           me->SetReactState(REACT_PASSIVE);
                       }
                     }
