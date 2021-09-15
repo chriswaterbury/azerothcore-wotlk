@@ -615,7 +615,7 @@ public:
                             me->SetControlled(false, UNIT_STATE_STUNNED);
                             // me->SetReactState(REACT_AGGRESSIVE);
                         } else {
-                            me->MoveJump(me->GetHomePosition());
+                            me->GetMotionMaster()->MoveJump(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY(),me->GetHomePosition().GetPositionZ(), 50, 50);
                             me->SetControlled(true, UNIT_STATE_STUNNED);
                             // me->SetReactState(REACT_PASSIVE);
                         }
