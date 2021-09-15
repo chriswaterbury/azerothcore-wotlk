@@ -591,32 +591,34 @@ public:
                     break;
                 case EVENT_MINION_CHECK_AI:
                     events.RepeatEvent(500);
-                    if (pullTimer == 0 && Creature* feugen = ObjectAccessor::GetCreature(*me, pInstance->GetGuidData(DATA_FEUGEN_BOSS)) && me->IsAlive()) {
-                      uint8 count = 0;
-                      bool active = false;
-                      auto s = me->getThreatMgr().getThreatList().begin();
-                      for (; s != me->getThreatMgr().getThreatList().end(); ++s, ++count)
-                      {
-                          Unit* target = (*s)->getTarget();
-                          if (
-                            (me->GetHomePosition().IsInDist(target, 28) && me->IsInCombat())
-                            ||
-                            me->IsInDist(target, 28)
-                            ||
-                            (!feugen->GetHomePosition().IsInDist(target, 28) && feugen->IsInCombat())
-                          )
-                          {
-                              active = true;
-                              break;
-                          }
-                      }
-                      if (active) {
-                          me->SetControlled(false, UNIT_STATE_STUNNED);
-                          // me->SetReactState(REACT_AGGRESSIVE);
-                      } else {
-                          me->MoveJump(me->GetHomePosition());
-                          me->SetControlled(true, UNIT_STATE_STUNNED);
-                          // me->SetReactState(REACT_PASSIVE);
+                    if (Creature* feugen = ObjectAccessor::GetCreature(*me, pInstance->GetGuidData(DATA_FEUGEN_BOSS))) {
+                      if (pullTimer == 0 && me->IsAlive()) {
+                        uint8 count = 0;
+                        bool active = false;
+                        auto s = me->getThreatMgr().getThreatList().begin();
+                        for (; s != me->getThreatMgr().getThreatList().end(); ++s, ++count)
+                        {
+                            Unit* target = (*s)->getTarget();
+                            if (
+                              (me->GetHomePosition().IsInDist(target, 28) && me->IsInCombat())
+                              ||
+                              me->IsInDist(target, 28)
+                              ||
+                              (!feugen->GetHomePosition().IsInDist(target, 28) && feugen->IsInCombat())
+                            )
+                            {
+                                active = true;
+                                break;
+                            }
+                        }
+                        if (active) {
+                            me->SetControlled(false, UNIT_STATE_STUNNED);
+                            // me->SetReactState(REACT_AGGRESSIVE);
+                        } else {
+                            me->MoveJump(me->GetHomePosition());
+                            me->SetControlled(true, UNIT_STATE_STUNNED);
+                            // me->SetReactState(REACT_PASSIVE);
+                        }
                       }
                     }
                     break;
