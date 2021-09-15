@@ -420,11 +420,11 @@ public:
                 events.ScheduleEvent(EVENT_MINION_STATIC_FIELD, 5000);
                 Talk(SAY_FEUG_AGGRO);
             }
+            events.ScheduleEvent(EVENT_MINION_CHECK_AI, 500);
             events.ScheduleEvent(EVENT_MINION_CHECK_DISTANCE, 5000);
 
             if (me->GetEntry() == NPC_STALAGG) // This event needs synchronisation, called for stalagg only
             {
-                events.ScheduleEvent(EVENT_MINION_CHECK_AI, 500);
                 events.ScheduleEvent(EVENT_MINION_MAGNETIC_PULL, 20000);
             }
             if (pInstance)
@@ -577,46 +577,23 @@ public:
                     }
                     break;
                 case EVENT_MINION_CHECK_AI:
-                    events.RepeatEvent(500);
-                    if (pInstance)
+                    uint8 count = 0;
+                    bool active = false;
+                    auto s = me->getThreatMgr().getThreatList().begin();
+                    for (; s != me->getThreatMgr().getThreatList().end(); ++s, ++count)
                     {
-                        if (Creature* feugen = ObjectAccessor::GetCreature(*me, pInstance->GetGuidData(DATA_FEUGEN_BOSS)))
+                        Unit* target = (*s)->getTarget();
+                        if (me->GetHomePosition().IsInDist(target, 28) && me->IsInCombat())
                         {
-                            uint8 feugenCounter = 0;
-                            bool feugenActive = false;
-                            auto f = feugen->getThreatMgr().getThreatList().begin();
-                            for (; f != feugen->getThreatMgr().getThreatList().end(); ++f, ++feugenCounter)
-                            {
-                                Unit* target = (*f)->getTarget();
-                                if (feugen->GetHomePosition().IsInDist(target, 28) && feugen->IsInCombat())
-                                {
-                                    feugenActive = true;
-                                }
-                            }
-                            if (feugenActive) {
-                                feugen->SetReactState(REACT_AGGRESSIVE);
-                            } else {
-                                feugen->SetReactState(REACT_PASSIVE);
-                            }
-
-                            uint8 stalaggCount = 0;
-                            bool stalaggActive = false;
-                            auto s = me->getThreatMgr().getThreatList().begin();
-                            for (; s != me->getThreatMgr().getThreatList().end(); ++s, ++stalaggCount)
-                            {
-                                Unit* target = (*s)->getTarget();
-                                if (me->GetHomePosition().IsInDist(target, 28) && me->IsInCombat())
-                                {
-                                    stalaggActive = true;
-                                }
-                            }
-                            if (stalaggActive) {
-                                me->SetReactState(REACT_AGGRESSIVE);
-                            } else {
-                                me->SetReactState(REACT_PASSIVE);
-                            }
+                            active = true;
                         }
                     }
+                    if (active) {
+                        me->SetReactState(REACT_AGGRESSIVE);
+                    } else {
+                        me->SetReactState(REACT_PASSIVE);
+                    }
+                    events.RepeatEvent(500);
                     break;
                 case EVENT_MINION_CHECK_DISTANCE:
                     if (Creature* cr = ObjectAccessor::GetCreature(*me, myCoil))
