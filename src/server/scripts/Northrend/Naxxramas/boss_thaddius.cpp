@@ -577,21 +577,24 @@ public:
                     }
                     break;
                 case EVENT_MINION_CHECK_AI:
-                    uint8 count = 0;
-                    bool active = false;
-                    auto s = me->getThreatMgr().getThreatList().begin();
-                    for (; s != me->getThreatMgr().getThreatList().end(); ++s, ++count)
+                    if (pInstance)
                     {
-                        Unit* target = (*s)->getTarget();
-                        if (me->GetHomePosition().IsInDist(target, 28) && me->IsInCombat())
-                        {
-                            active = true;
-                        }
-                    }
-                    if (active) {
-                        me->SetReactState(REACT_AGGRESSIVE);
-                    } else {
-                        me->SetReactState(REACT_PASSIVE);
+                      uint8 count = 0;
+                      bool active = false;
+                      auto s = me->getThreatMgr().getThreatList().begin();
+                      for (; s != me->getThreatMgr().getThreatList().end(); ++s, ++count)
+                      {
+                          Unit* target = (*s)->getTarget();
+                          if (me->GetHomePosition().IsInDist(target, 28) && me->IsInCombat())
+                          {
+                              active = true;
+                          }
+                      }
+                      if (active) {
+                          me->SetReactState(REACT_AGGRESSIVE);
+                      } else {
+                          me->SetReactState(REACT_PASSIVE);
+                      }
                     }
                     events.RepeatEvent(500);
                     break;
