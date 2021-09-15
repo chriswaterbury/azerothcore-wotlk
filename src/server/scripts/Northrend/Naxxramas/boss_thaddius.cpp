@@ -467,31 +467,31 @@ public:
         {
             Talk(me->GetEntry() == NPC_STALAGG ? SAY_STAL_DEATH : SAY_FEUG_DEATH);
             Talk(me->GetEntry() == NPC_STALAGG ? EMOTE_STAL_DEATH : EMOTE_FEUG_DEATH);
-            if (NPC_STALAGG) {
-              Creature* feugen = ObjectAccessor::GetCreature(*me, pInstance->GetGuidData(DATA_FEUGEN_BOSS));
-              uint8 counter = 0;
-              auto i = feugen->getThreatMgr().getThreatList().begin();
-              for (; i != feugen->getThreatMgr().getThreatList().end(); ++i, ++counter)
-              {
-                  // Gather all units with melee range
-                  Unit* target = (*i)->getTarget();
-                  feugen->CastSpell(target, SPELL_MAGNETIC_PULL, true);
-              }
-              DoAction(ACTION_MAGNETIC_PULL);
-            } else {
-              Creature* stalagg = ObjectAccessor::GetCreature(*me, pInstance->GetGuidData(DATA_STALAGG_BOSS));
-              uint8 counter = 0;
-              auto i = stalagg->getThreatMgr().getThreatList().begin();
-              for (; i != stalagg->getThreatMgr().getThreatList().end(); ++i, ++counter)
-              {
-                  // Gather all units with melee range
-                  Unit* target = (*i)->getTarget();
-                  stalagg->CastSpell(target, SPELL_MAGNETIC_PULL, true);
-              }
-              DoAction(ACTION_MAGNETIC_PULL);
-            }
             if (pInstance)
             {
+                if (me->GetEntry() == NPC_STALAGG) {
+                  Creature* feugen = ObjectAccessor::GetCreature(*me, pInstance->GetGuidData(DATA_FEUGEN_BOSS));
+                  uint8 counter = 0;
+                  auto i = feugen->getThreatMgr().getThreatList().begin();
+                  for (; i != feugen->getThreatMgr().getThreatList().end(); ++i, ++counter)
+                  {
+                      // Gather all units with melee range
+                      Unit* target = (*i)->getTarget();
+                      feugen->CastSpell(target, SPELL_MAGNETIC_PULL, true);
+                  }
+                  DoAction(ACTION_MAGNETIC_PULL);
+                } else {
+                  Creature* stalagg = ObjectAccessor::GetCreature(*me, pInstance->GetGuidData(DATA_STALAGG_BOSS));
+                  uint8 counter = 0;
+                  auto i = stalagg->getThreatMgr().getThreatList().begin();
+                  for (; i != stalagg->getThreatMgr().getThreatList().end(); ++i, ++counter)
+                  {
+                      // Gather all units with melee range
+                      Unit* target = (*i)->getTarget();
+                      stalagg->CastSpell(target, SPELL_MAGNETIC_PULL, true);
+                  }
+                  DoAction(ACTION_MAGNETIC_PULL);
+                }
                 if (Creature* cr = ObjectAccessor::GetCreature(*me, pInstance->GetGuidData(DATA_THADDIUS_BOSS)))
                 {
                     cr->AI()->DoAction(ACTION_SUMMON_DIED);
@@ -615,7 +615,6 @@ public:
                     }
                     break;
                 case EVENT_MINION_CHECK_AI:
-                    events.RepeatEvent(500);
                     if (pullTimer == 0 && me->IsAlive()) {
                       uint8 count = 0;
                       bool active = false;
@@ -642,6 +641,7 @@ public:
                           // me->SetReactState(REACT_PASSIVE);
                       }
                     }
+                    events.RepeatEvent(500);
                     break;
                 case EVENT_MINION_CHECK_DISTANCE:
                     if (Creature* cr = ObjectAccessor::GetCreature(*me, myCoil))
