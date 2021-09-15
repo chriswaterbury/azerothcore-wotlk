@@ -589,7 +589,7 @@ public:
                     break;
                 case EVENT_MINION_CHECK_AI:
                     events.RepeatEvent(500);
-                    if (pullTimer == 0 && Creature* feugen = ObjectAccessor::GetCreature(*me, pInstance->GetGuidData(DATA_FEUGEN_BOSS))) {
+                    if (pullTimer == 0 && Creature* feugen = ObjectAccessor::GetCreature(*me, pInstance->GetGuidData(DATA_FEUGEN_BOSS)) && me->IsAlive()) {
                       uint8 count = 0;
                       bool active = false;
                       auto s = me->getThreatMgr().getThreatList().begin();
@@ -612,8 +612,8 @@ public:
                           me->SetControlled(false, UNIT_STATE_STUNNED);
                           // me->SetReactState(REACT_AGGRESSIVE);
                       } else {
+                          me->MoveJump(me->GetHomePosition());
                           me->SetControlled(true, UNIT_STATE_STUNNED);
-                          me->JumpTo(me->GetHomePosition());
                           // me->SetReactState(REACT_PASSIVE);
                       }
                     }
