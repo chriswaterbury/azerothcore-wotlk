@@ -547,7 +547,6 @@ public:
                             float threatStalagg = me->getThreatMgr().getThreat(me->GetVictim());
                             Unit* tankFeugen = feugen->GetVictim();
                             Unit* tankStalagg = me->GetVictim();
-
                             if (feugen->GetReactState() == REACT_AGGRESSIVE) {
                                 me->getThreatMgr().modifyThreatPercent(tankStalagg, -100);
                                 me->AddThreat(tankFeugen, threatStalagg);
@@ -560,6 +559,8 @@ public:
                                     me->CastSpell(target, SPELL_MAGNETIC_PULL, true);
                                 }
                                 DoAction(ACTION_MAGNETIC_PULL);
+                                me->SetControlled(true);
+                                feugen->SetControlled(false, UNIT_STATE_ROOT);
                             } else {
                                 feugen->getThreatMgr().modifyThreatPercent(tankFeugen, -100);
                                 feugen->AddThreat(tankStalagg, threatFeugen);
@@ -572,6 +573,8 @@ public:
                                     feugen->CastSpell(target, SPELL_MAGNETIC_PULL, true);
                                 }
                                 DoAction(ACTION_MAGNETIC_PULL);
+                                feugen->SetControlled(true);
+                                me->SetControlled(false, UNIT_STATE_ROOT);
                             }
                         }
                     }
@@ -591,8 +594,10 @@ public:
                           }
                       }
                       if (active) {
+                          me->SetControlled(false, UNIT_STATE_ROOT);
                           me->SetReactState(REACT_AGGRESSIVE);
                       } else {
+                          me->SetControlled(true);
                           me->SetReactState(REACT_PASSIVE);
                       }
                     }
