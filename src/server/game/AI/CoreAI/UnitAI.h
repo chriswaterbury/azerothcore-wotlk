@@ -9,6 +9,7 @@
 
 #include "Containers.h"
 #include "Define.h"
+#include "Player.h"
 #include "Unit.h"
 #include <list>
 
@@ -212,7 +213,7 @@ public:
         if (targetType == SELECT_TARGET_RANDOM_NON_HEALER)
             targetList.remove_if([](auto val)
             {
-              if (Player* p = (*val)->ToPlayer())
+              if (Player* p = val->ToPlayer())
               {
                   uint8 maxIndex = p->GetMostPointsTalentTree();
                   return ((p->getClass() == CLASS_DRUID && maxIndex == 2) || (p->getClass() == CLASS_PALADIN && maxIndex == 0) || (p->getClass() == CLASS_PRIEST && maxIndex <= 1) || (p->getClass() == CLASS_SHAMAN && maxIndex == 2));
