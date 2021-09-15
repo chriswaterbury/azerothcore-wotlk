@@ -559,8 +559,8 @@ public:
                                     me->CastSpell(target, SPELL_MAGNETIC_PULL, true);
                                 }
                                 DoAction(ACTION_MAGNETIC_PULL);
-                                me->SetControlled(true, UNIT_STATE_ROOT);
-                                feugen->SetControlled(false, UNIT_STATE_ALL_STATE);
+                                me->SetControlled(false, UNIT_STATE_ALL_STATE_SUPPORTED);
+                                feugen->SetControlled(true, UNIT_STATE_ROOT);
                             } else {
                                 feugen->getThreatMgr().modifyThreatPercent(tankFeugen, -100);
                                 feugen->AddThreat(tankStalagg, threatFeugen);
@@ -573,8 +573,8 @@ public:
                                     feugen->CastSpell(target, SPELL_MAGNETIC_PULL, true);
                                 }
                                 DoAction(ACTION_MAGNETIC_PULL);
-                                feugen->SetControlled(true, UNIT_STATE_ROOT);
-                                me->SetControlled(false, UNIT_STATE_ALL_STATE);
+                                feugen->SetControlled(false, UNIT_STATE_ALL_STATE_SUPPORTED);
+                                me->SetControlled(true, UNIT_STATE_ROOT);
                             }
                         }
                     }
@@ -587,14 +587,14 @@ public:
                       for (; s != me->getThreatMgr().getThreatList().end(); ++s, ++count)
                       {
                           Unit* target = (*s)->getTarget();
-                          if (target->GetPosition().IsInDist(me->GetHomePosition(), 28) && me->IsInCombat())
+                          if (me->GetHomePosition().IsInDist(target, 28) && me->IsInCombat())
                           {
                               active = true;
                               break;
                           }
                       }
                       if (active) {
-                          me->SetControlled(false, UNIT_STATE_ALL_STATE);
+                          me->SetControlled(false, UNIT_STATE_ALL_STATE_SUPPORTED);
                           me->SetReactState(REACT_AGGRESSIVE);
                       } else {
                           me->SetControlled(true, UNIT_STATE_ROOT);
