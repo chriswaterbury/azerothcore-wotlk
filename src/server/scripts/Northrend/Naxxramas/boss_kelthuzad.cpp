@@ -401,7 +401,7 @@ public:
                     {
                         me->CastSpell(target, SPELL_SHADOW_FISURE, false);
                     }
-                    events.RepeatEvent(25000);
+                    events.RepeatEvent(27000);
                     break;
                 case EVENT_FROST_BLAST:
                     if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM_NON_HEALER, 1, 0, true))
