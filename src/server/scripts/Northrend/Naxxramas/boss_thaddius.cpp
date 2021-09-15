@@ -76,14 +76,14 @@ enum Events
     EVENT_MINION_MAGNETIC_PULL          = 2,
     EVENT_MINION_CHECK_DISTANCE         = 3,
     EVENT_MINION_STATIC_FIELD           = 4,
-    EVENT_MINION_CHECK_AI               = 11,
+    EVENT_MINION_CHECK_AI               = 5,
 
-    EVENT_THADDIUS_INIT                 = 5,
-    EVENT_THADDIUS_ENTER_COMBAT         = 6,
-    EVENT_THADDIUS_CHAIN_LIGHTNING      = 7,
-    EVENT_THADDIUS_BERSERK              = 8,
-    EVENT_THADDIUS_POLARITY_SHIFT       = 9,
-    EVENT_ALLOW_BALL_LIGHTNING          = 10
+    EVENT_THADDIUS_INIT                 = 6,
+    EVENT_THADDIUS_ENTER_COMBAT         = 7,
+    EVENT_THADDIUS_CHAIN_LIGHTNING      = 8,
+    EVENT_THADDIUS_BERSERK              = 9,
+    EVENT_THADDIUS_POLARITY_SHIFT       = 10,
+    EVENT_ALLOW_BALL_LIGHTNING          = 11
 };
 
 enum Misc
@@ -584,10 +584,10 @@ public:
                         {
                             uint8 feugenCounter = 0;
                             bool feugenActive = false;
-                            auto i = feugen->getThreatMgr().getThreatList().begin();
-                            for (; i != feugen->getThreatMgr().getThreatList().end(); ++i, ++feugenCounter)
+                            auto f = feugen->getThreatMgr().getThreatList().begin();
+                            for (; f != feugen->getThreatMgr().getThreatList().end(); ++f, ++feugenCounter)
                             {
-                                Unit* target = (*i)->getTarget();
+                                Unit* target = (*f)->getTarget();
                                 if (feugen->GetHomePosition().IsInDist(target, 28) && feugen->IsInCombat())
                                 {
                                     feugenActive = true;
@@ -601,10 +601,10 @@ public:
 
                             uint8 stalaggCount = 0;
                             bool stalaggActive = false;
-                            auto i = me->getThreatMgr().getThreatList().begin();
-                            for (; i != me->getThreatMgr().getThreatList().end(); ++i, ++stalaggCount)
+                            auto s = me->getThreatMgr().getThreatList().begin();
+                            for (; s != me->getThreatMgr().getThreatList().end(); ++s, ++stalaggCount)
                             {
-                                Unit* target = (*i)->getTarget();
+                                Unit* target = (*s)->getTarget();
                                 if (me->GetHomePosition().IsInDist(target, 28) && me->IsInCombat())
                                 {
                                     stalaggActive = true;
@@ -681,7 +681,7 @@ public:
             if (count)
             {
                 uint32 spellId = GetSpellInfo()->Id == SPELL_POSITIVE_CHARGE ? SPELL_POSITIVE_CHARGE_STACK : SPELL_NEGATIVE_CHARGE_STACK;
-                GetCaster()->SetAuraStack(spellId, GetCaster(), count);
+                GetCaster()->SetAuraStack(spellId, GetCaster(), count*RAID_MODE(2,5));
             }
         }
 

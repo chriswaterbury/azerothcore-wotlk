@@ -25,6 +25,7 @@ enum SelectAggroTarget
     SELECT_TARGET_BOTTOMAGGRO,                              //Selects targets from bottom aggro to top
     SELECT_TARGET_NEAREST,
     SELECT_TARGET_FARTHEST,
+    SELECT_TARGET_RANDOM_NON_HEALER,
 };
 
 // default predicate function to select target based on distance, player and/or aura criteria
@@ -207,6 +208,13 @@ public:
 
         if (targetType == SELECT_TARGET_NEAREST || targetType == SELECT_TARGET_FARTHEST)
             targetList.sort(Acore::ObjectDistanceOrderPred(me));
+        
+        if (targetType == SELECT_TARGET_RANDOM_NON_HEALER)
+            targetList.remove_if([](auto val)
+            {
+              uint8 maxIndex = p->GetMostPointsTalentTree();
+              return ((p->getClass() == CLASS_DRUID && maxIndex == 2) || (p->getClass() == CLASS_PALADIN && maxIndex == 0) || (p->getClass() == CLASS_PRIEST && maxIndex <= 1) || (p->getClass() == CLASS_SHAMAN && maxIndex == 2))
+            })
 
         switch (targetType)
         {
@@ -225,6 +233,7 @@ public:
                     return *ritr;
                 }
             case SELECT_TARGET_RANDOM:
+            case SELECT_TARGET_RANDOM_NON_HEALER:
                 {
                     std::list<Unit*>::iterator itr = targetList.begin();
                     std::advance(itr, urand(position, targetList.size() - 1));

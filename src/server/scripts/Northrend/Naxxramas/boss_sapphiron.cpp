@@ -310,15 +310,15 @@ public:
                         std::vector<Unit*> targets;
                         auto i = me->getThreatMgr().getThreatList().begin();
                         for (; i != me->getThreatMgr().getThreatList().end(); ++i)
-                        {   Unit* curTarget = (*i)=>getTarget();
-                            if (curTarget->GetTypeId() == TYPEID_PLAYER)
+                        {
+                            if ((*i)->getTarget()->GetTypeId() == TYPEID_PLAYER)
                             {
                                 bool inList = false;
                                 if (!blockList.empty())
                                 {
                                     for (GuidList::const_iterator itr = blockList.begin(); itr != blockList.end(); ++itr)
                                     {
-                                        if (curTarget->GetGUID() == *itr)
+                                        if ((*i)->getTarget()->GetGUID() == *itr)
                                         {
                                             inList = true;
                                             break;
@@ -327,7 +327,7 @@ public:
                                 }
                                 if (!inList)
                                 {
-                                    targets.push_back(curTarget);
+                                    targets.push_back((*i)->getTarget());
                                 }
                             }
                         }

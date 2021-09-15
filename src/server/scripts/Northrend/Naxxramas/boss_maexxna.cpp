@@ -158,7 +158,7 @@ public:
                 case EVENT_WEB_SPRAY:
                     Talk(EMOTE_WEB_SPRAY);
                     me->CastSpell(me, SPELL_WEB_SPRAY_10, true);
-                    events.RepeatEvent(40000);
+                    events.RepeatEvent(50000);
                     break;
                 case EVENT_POISON_SHOCK:
                     me->CastSpell(me->GetVictim(), RAID_MODE(SPELL_POISON_SHOCK_10, SPELL_POISON_SHOCK_25), false);
@@ -174,7 +174,7 @@ public:
                     {
                         me->SummonCreature(NPC_MAEXXNA_SPIDERLING, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), me->GetOrientation());
                     }
-                    events.RepeatEvent(40000);
+                    events.RepeatEvent(50000);
                     break;
                 case EVENT_HEALTH_CHECK:
                     if (me->GetHealthPct() < 15)
@@ -188,7 +188,7 @@ public:
                     Talk(EMOTE_WEB_WRAP);
                     for (uint8 i = 0; i < RAID_MODE(1, 2); ++i)
                     {
-                        if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1, 0, true, -SPELL_WEB_WRAP))
+                        if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM_NON_HEALER, 1, 0, true, -SPELL_WEB_WRAP))
                         {
                             target->RemoveAura(RAID_MODE(SPELL_WEB_SPRAY_10, SPELL_WEB_SPRAY_25));
                             uint8 pos = urand(0, 2);

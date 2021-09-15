@@ -404,7 +404,7 @@ public:
                     events.RepeatEvent(25000);
                     break;
                 case EVENT_FROST_BLAST:
-                    if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, RAID_MODE(1, 0), 0, true))
+                    if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM_NON_HEALER, 1, 0, true))
                     {
                         me->CastSpell(target, SPELL_FROST_BLAST, false);
                     }
