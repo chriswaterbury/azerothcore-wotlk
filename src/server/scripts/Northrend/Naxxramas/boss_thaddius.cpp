@@ -554,7 +554,9 @@ public:
                             {
                                 Unit* target = (*s)->getTarget();
                                 if (
-                                  (me->GetHomePosition().IsInDist(target, 28) && me->IsInCombat())
+                                  me->GetHomePosition().IsInDist(target, 28)
+                                  ||
+                                  me->IsInDist(target, 28)
                                 )
                                 {
                                     active = true;
