@@ -157,7 +157,7 @@ public:
             {
                 case EVENT_WEB_SPRAY:
                     Talk(EMOTE_WEB_SPRAY);
-                    me->CastSpell(me, RAID_MODE(SPELL_WEB_SPRAY_10, SPELL_WEB_SPRAY_25), true);
+                    me->CastSpell(me, SPELL_WEB_SPRAY_10, true);
                     events.RepeatEvent(40000);
                     break;
                 case EVENT_POISON_SHOCK:
@@ -177,9 +177,9 @@ public:
                     events.RepeatEvent(40000);
                     break;
                 case EVENT_HEALTH_CHECK:
-                    if (me->GetHealthPct() < 30)
+                    if (me->GetHealthPct() < 15)
                     {
-                        me->CastSpell(me, RAID_MODE(SPELL_FRENZY_10, SPELL_FRENZY_25), true);
+                        me->CastSpell(me, SPELL_FRENZY_10, true);
                         break;
                     }
                     events.RepeatEvent(1000);

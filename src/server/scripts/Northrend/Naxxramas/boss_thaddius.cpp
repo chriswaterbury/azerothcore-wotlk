@@ -76,6 +76,7 @@ enum Events
     EVENT_MINION_MAGNETIC_PULL          = 2,
     EVENT_MINION_CHECK_DISTANCE         = 3,
     EVENT_MINION_STATIC_FIELD           = 4,
+    EVENT_MINION_CHECK_AI               = 11,
 
     EVENT_THADDIUS_INIT                 = 5,
     EVENT_THADDIUS_ENTER_COMBAT         = 6,
@@ -423,6 +424,7 @@ public:
 
             if (me->GetEntry() == NPC_STALAGG) // This event needs synchronisation, called for stalagg only
             {
+                events.ScheduleEvent(EVENT_MINION_CHECK_AI, 500);
                 events.ScheduleEvent(EVENT_MINION_MAGNETIC_PULL, 20000);
             }
             if (pInstance)
@@ -546,15 +548,73 @@ public:
                             Unit* tankFeugen = feugen->GetVictim();
                             Unit* tankStalagg = me->GetVictim();
 
-                            feugen->getThreatMgr().modifyThreatPercent(tankFeugen, -100);
-                            feugen->AddThreat(tankStalagg, threatFeugen);
-                            feugen->CastSpell(tankStalagg, SPELL_MAGNETIC_PULL, true);
-                            feugen->AI()->DoAction(ACTION_MAGNETIC_PULL);
+                            if (feugen->GetReactState() == REACT_AGGRESSIVE) {
+                                me->getThreatMgr().modifyThreatPercent(tankStalagg, -100);
+                                me->AddThreat(tankFeugen, threatStalagg);
+                                uint8 counter = 0;
+                                auto i = me->getThreatMgr().getThreatList().begin();
+                                for (; i != me->getThreatMgr().getThreatList().end(); ++i, ++counter)
+                                {
+                                    // Gather all units with melee range
+                                    Unit* target = (*i)->getTarget();
+                                    me->CastSpell(target, SPELL_MAGNETIC_PULL, true);
+                                }
+                                DoAction(ACTION_MAGNETIC_PULL);
+                            } else {
+                                feugen->getThreatMgr().modifyThreatPercent(tankFeugen, -100);
+                                feugen->AddThreat(tankStalagg, threatFeugen);
+                                uint8 counter = 0;
+                                auto i = feugen->getThreatMgr().getThreatList().begin();
+                                for (; i != feugen->getThreatMgr().getThreatList().end(); ++i, ++counter)
+                                {
+                                    // Gather all units with melee range
+                                    Unit* target = (*i)->getTarget();
+                                    feugen->CastSpell(target, SPELL_MAGNETIC_PULL, true);
+                                }
+                                DoAction(ACTION_MAGNETIC_PULL);
+                            }
+                        }
+                    }
+                    break;
+                case EVENT_MINION_CHECK_AI:
+                    events.RepeatEvent(500);
+                    if (pInstance)
+                    {
+                        if (Creature* feugen = ObjectAccessor::GetCreature(*me, pInstance->GetGuidData(DATA_FEUGEN_BOSS)))
+                        {
+                            uint8 feugenCounter = 0;
+                            bool feugenActive = false;
+                            auto i = feugen->getThreatMgr().getThreatList().begin();
+                            for (; i != feugen->getThreatMgr().getThreatList().end(); ++i, ++feugenCounter)
+                            {
+                                Unit* target = (*i)->getTarget();
+                                if (feugen->GetHomePosition().IsInDist(target, 28) && feugen->IsInCombat())
+                                {
+                                    feugenActive = true;
+                                }
+                            }
+                            if (feugenActive) {
+                                feugen->SetReactState(REACT_PASSIVE);
+                            } else {
+                                feugen->SetReactState(REACT_AGGRESSIVE);
+                            }
 
-                            me->getThreatMgr().modifyThreatPercent(tankStalagg, -100);
-                            me->AddThreat(tankFeugen, threatStalagg);
-                            me->CastSpell(tankFeugen, SPELL_MAGNETIC_PULL, true);
-                            DoAction(ACTION_MAGNETIC_PULL);
+                            uint8 stalaggCount = 0;
+                            bool stalaggActive = false;
+                            auto i = me->getThreatMgr().getThreatList().begin();
+                            for (; i != me->getThreatMgr().getThreatList().end(); ++i, ++stalaggCount)
+                            {
+                                Unit* target = (*i)->getTarget();
+                                if (me->GetHomePosition().IsInDist(target, 28) && me->IsInCombat())
+                                {
+                                    stalaggActive = true;
+                                }
+                            }
+                            if (stalaggActive) {
+                                me->SetReactState(REACT_PASSIVE);
+                            } else {
+                                me->SetReactState(REACT_AGGRESSIVE);
+                            }
                         }
                     }
                     break;

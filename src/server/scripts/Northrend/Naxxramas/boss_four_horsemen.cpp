@@ -333,12 +333,12 @@ public:
                     events.RepeatEvent(15000);
                     return;
                 case EVENT_PUNISH:
-                    if (!SelectTarget(SELECT_TARGET_NEAREST, 0, 45.0f, true))
-                    {
-                        me->CastSpell(me, TABLE_SPELL_PUNISH[horsemanId], false);
-                        Talk(EMOTE_RAGECAST);
-                    }
-                    events.RepeatEvent(2010);
+                    // if (!SelectTarget(SELECT_TARGET_NEAREST, 0, 45.0f, true))
+                    // {
+                    //     me->CastSpell(me, TABLE_SPELL_PUNISH[horsemanId], false);
+                    //     Talk(EMOTE_RAGECAST);
+                    // }
+                    // events.RepeatEvent(2010);
                     return;
                 case EVENT_SECONDARY_SPELL:
                     me->CastSpell(me->GetVictim(), RAID_MODE(TABLE_SPELL_SECONDARY_10[horsemanId], TABLE_SPELL_SECONDARY_25[horsemanId]), false);

@@ -149,7 +149,7 @@ public:
         {
             BossAI::EnterCombat(who);
             EnterCombatSelfFunction();
-            me->CastSpell(me, RAID_MODE(SPELL_FROST_AURA_10, SPELL_FROST_AURA_25), true);
+            me->CastSpell(me, SPELL_FROST_AURA_10, true);
             events.ScheduleEvent(EVENT_BERSERK, 900000);
             events.ScheduleEvent(EVENT_CLEAVE, 5000);
             events.ScheduleEvent(EVENT_TAIL_SWEEP, 10000);
@@ -253,7 +253,7 @@ public:
                     events.RepeatEvent(10000);
                     return;
                 case EVENT_LIFE_DRAIN:
-                    me->CastCustomSpell(RAID_MODE(SPELL_LIFE_DRAIN_10, SPELL_LIFE_DRAIN_25), SPELLVALUE_MAX_TARGETS, RAID_MODE(2, 5), me, false);
+                    me->CastCustomSpell(RAID_MODE(SPELL_LIFE_DRAIN_10, SPELL_LIFE_DRAIN_25), SPELLVALUE_MAX_TARGETS, RAID_MODE(2, 3), me, false);
                     events.RepeatEvent(24000);
                     return;
                 case EVENT_BLIZZARD:
@@ -279,7 +279,7 @@ public:
                     {
                         return;
                     }
-                    events.RepeatEvent(45000);
+                    events.RepeatEvent(60000);
                     events.DelayEvents(35000);
                     me->SetReactState(REACT_PASSIVE);
                     me->AttackStop();
@@ -294,7 +294,7 @@ public:
                     me->HandleEmoteCommand(EMOTE_ONESHOT_LIFTOFF);
                     me->SetDisableGravity(true);
                     currentTarget.Clear();
-                    events.ScheduleEvent(EVENT_FLIGHT_ICEBOLT, 3000);
+                    events.ScheduleEvent(EVENT_FLIGHT_ICEBOLT, 3500);
                     iceboltCount = RAID_MODE(2, 3);
                     return;
                 case EVENT_FLIGHT_ICEBOLT:
@@ -310,15 +310,15 @@ public:
                         std::vector<Unit*> targets;
                         auto i = me->getThreatMgr().getThreatList().begin();
                         for (; i != me->getThreatMgr().getThreatList().end(); ++i)
-                        {
-                            if ((*i)->getTarget()->GetTypeId() == TYPEID_PLAYER)
+                        {   Unit* curTarget = (*i)=>getTarget();
+                            if (curTarget->GetTypeId() == TYPEID_PLAYER)
                             {
                                 bool inList = false;
                                 if (!blockList.empty())
                                 {
                                     for (GuidList::const_iterator itr = blockList.begin(); itr != blockList.end(); ++itr)
                                     {
-                                        if ((*i)->getTarget()->GetGUID() == *itr)
+                                        if (curTarget->GetGUID() == *itr)
                                         {
                                             inList = true;
                                             break;
@@ -327,7 +327,7 @@ public:
                                 }
                                 if (!inList)
                                 {
-                                    targets.push_back((*i)->getTarget());
+                                    targets.push_back(curTarget);
                                 }
                             }
                         }

@@ -134,6 +134,9 @@ public:
                         std::list<Unit*, std::allocator<Unit*>>::iterator itr;
                         for (itr = meleeRangeTargets.begin(); itr != meleeRangeTargets.end(); ++itr, ++counter)
                         {
+                            // Just make it target the tank
+                            finalTarget = (*itr);
+                            break;
                             // if there is only one target available
                             if (meleeRangeTargets.size() == 1)
                             {
