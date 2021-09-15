@@ -671,7 +671,7 @@ public:
                 {
                     if (Player* target = ihit->ToPlayer())
                     {
-                        difficulty = traget->GetMap()->GetDifficulty();
+                        difficulty = target->GetMap()->GetDifficulty();
                         if (target->HasAura(GetTriggeringSpell()->Id))
                         {
                             ++count;
