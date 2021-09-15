@@ -559,8 +559,8 @@ public:
                                     me->CastSpell(target, SPELL_MAGNETIC_PULL, true);
                                 }
                                 DoAction(ACTION_MAGNETIC_PULL);
-                                me->SetControlled(false, UNIT_STATE_ROOT);
-                                feugen->SetControlled(true, UNIT_STATE_ROOT);
+                                me->SetControlled(true, UNIT_STATE_ROOT);
+                                feugen->SetControlled(false, UNIT_STATE_ALL_STATE);
                             } else {
                                 feugen->getThreatMgr().modifyThreatPercent(tankFeugen, -100);
                                 feugen->AddThreat(tankStalagg, threatFeugen);
@@ -573,14 +573,13 @@ public:
                                     feugen->CastSpell(target, SPELL_MAGNETIC_PULL, true);
                                 }
                                 DoAction(ACTION_MAGNETIC_PULL);
-                                feugen->SetControlled(false, UNIT_STATE_ROOT);
-                                me->SetControlled(true, UNIT_STATE_ROOT);
+                                feugen->SetControlled(true, UNIT_STATE_ROOT);
+                                me->SetControlled(false, UNIT_STATE_ALL_STATE);
                             }
                         }
                     }
                     break;
                 case EVENT_MINION_CHECK_AI:
-                    if (pInstance)
                     {
                       uint8 count = 0;
                       bool active = false;
@@ -588,18 +587,18 @@ public:
                       for (; s != me->getThreatMgr().getThreatList().end(); ++s, ++count)
                       {
                           Unit* target = (*s)->getTarget();
-                          if (me->GetHomePosition().IsInDist(target, 28) && me->IsInCombat())
+                          if (target->GetPosition().IsInDist(me->GetHomePosition(), 28) && me->IsInCombat())
                           {
                               active = true;
                               break;
                           }
                       }
                       if (active) {
-                          me->SetControlled(true, UNIT_STATE_ROOT);
-                          // me->SetReactState(REACT_AGGRESSIVE);
+                          me->SetControlled(false, UNIT_STATE_ALL_STATE);
+                          me->SetReactState(REACT_AGGRESSIVE);
                       } else {
-                          me->SetControlled(false, UNIT_STATE_ROOT);
-                          // me->SetReactState(REACT_PASSIVE);
+                          me->SetControlled(true, UNIT_STATE_ROOT);
+                          me->SetReactState(REACT_PASSIVE);
                       }
                     }
                     events.RepeatEvent(500);
