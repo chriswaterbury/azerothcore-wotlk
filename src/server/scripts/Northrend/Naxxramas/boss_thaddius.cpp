@@ -664,7 +664,7 @@ public:
         void HandleTargets(std::list<WorldObject*>& targets)
         {
             uint8 count = 0;
-            Difficulty difficulty = 0;
+            Difficulty difficulty = RAID_DIFFICULTY_10MAN_NORMAL;
             for (auto& ihit : targets)
             {
                 if (ihit->GetGUID() != GetCaster()->GetGUID())
@@ -683,7 +683,7 @@ public:
             if (count)
             {
                 uint32 spellId = GetSpellInfo()->Id == SPELL_POSITIVE_CHARGE ? SPELL_POSITIVE_CHARGE_STACK : SPELL_NEGATIVE_CHARGE_STACK;
-                GetCaster()->SetAuraStack(spellId, GetCaster(), count*((difficulty == 0 || difficulty == 2) ? 2 : 5));
+                GetCaster()->SetAuraStack(spellId, GetCaster(), count*((difficulty == RAID_DIFFICULTY_10MAN_NORMAL || difficulty == RAID_DIFFICULTY_10MAN_HEROIC) ? 2 : 5));
             }
         }
 
