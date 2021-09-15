@@ -547,7 +547,9 @@ public:
                             float threatStalagg = me->getThreatMgr().getThreat(me->GetVictim());
                             Unit* tankFeugen = feugen->GetVictim();
                             Unit* tankStalagg = me->GetVictim();
+                            uint8 count = 0;
                             bool active = false;
+                            auto s = me->getThreatMgr().getThreatList().begin();
                             for (; s != me->getThreatMgr().getThreatList().end(); ++s, ++count)
                             {
                                 Unit* target = (*s)->getTarget();
