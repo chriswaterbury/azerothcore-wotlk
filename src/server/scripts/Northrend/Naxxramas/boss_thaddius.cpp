@@ -547,19 +547,19 @@ public:
                             float threatStalagg = me->getThreatMgr().getThreat(me->GetVictim());
                             Unit* tankFeugen = feugen->GetVictim();
                             Unit* tankStalagg = me->GetVictim();
-                            if (feugen->GetReactState() == REACT_AGGRESSIVE) {
-                                me->getThreatMgr().modifyThreatPercent(tankStalagg, -100);
-                                me->AddThreat(tankFeugen, threatStalagg);
-                                uint8 counter = 0;
-                                auto i = me->getThreatMgr().getThreatList().begin();
-                                for (; i != me->getThreatMgr().getThreatList().end(); ++i, ++counter)
+                            bool active = false;
+                            for (; s != me->getThreatMgr().getThreatList().end(); ++s, ++count)
+                            {
+                                Unit* target = (*s)->getTarget();
+                                if (
+                                  (me->GetHomePosition().IsInDist(target, 28) && me->IsInCombat())
+                                )
                                 {
-                                    // Gather all units with melee range
-                                    Unit* target = (*i)->getTarget();
-                                    me->CastSpell(target, SPELL_MAGNETIC_PULL, true);
+                                    active = true;
+                                    break;
                                 }
-                                DoAction(ACTION_MAGNETIC_PULL);
-                            } else {
+                            }
+                            if (active) {
                                 feugen->getThreatMgr().modifyThreatPercent(tankFeugen, -100);
                                 feugen->AddThreat(tankStalagg, threatFeugen);
                                 uint8 counter = 0;
@@ -571,13 +571,25 @@ public:
                                     feugen->CastSpell(target, SPELL_MAGNETIC_PULL, true);
                                 }
                                 DoAction(ACTION_MAGNETIC_PULL);
+                            } else {
+                                me->getThreatMgr().modifyThreatPercent(tankStalagg, -100);
+                                me->AddThreat(tankFeugen, threatStalagg);
+                                uint8 counter = 0;
+                                auto i = me->getThreatMgr().getThreatList().begin();
+                                for (; i != me->getThreatMgr().getThreatList().end(); ++i, ++counter)
+                                {
+                                    // Gather all units with melee range
+                                    Unit* target = (*i)->getTarget();
+                                    me->CastSpell(target, SPELL_MAGNETIC_PULL, true);
+                                }
+                                DoAction(ACTION_MAGNETIC_PULL);
                             }
                         }
                     }
                     break;
                 case EVENT_MINION_CHECK_AI:
                     events.RepeatEvent(500);
-                    if (Creature* feugen = ObjectAccessor::GetCreature(*me, pInstance->GetGuidData(DATA_FEUGEN_BOSS))) {
+                    if (pullTimer == 0 && Creature* feugen = ObjectAccessor::GetCreature(*me, pInstance->GetGuidData(DATA_FEUGEN_BOSS))) {
                       uint8 count = 0;
                       bool active = false;
                       auto s = me->getThreatMgr().getThreatList().begin();
@@ -586,6 +598,8 @@ public:
                           Unit* target = (*s)->getTarget();
                           if (
                             (me->GetHomePosition().IsInDist(target, 28) && me->IsInCombat())
+                            ||
+                            me->IsInDist(target, 28)
                             ||
                             (!feugen->GetHomePosition().IsInDist(target, 28) && feugen->IsInCombat())
                           )
@@ -596,11 +610,11 @@ public:
                       }
                       if (active) {
                           me->SetControlled(false, UNIT_STATE_STUNNED);
-                          me->SetReactState(REACT_AGGRESSIVE);
+                          // me->SetReactState(REACT_AGGRESSIVE);
                       } else {
                           me->SetControlled(true, UNIT_STATE_STUNNED);
-                          me->JumpTo(me->GetHomePosition())
-                          me->SetReactState(REACT_PASSIVE);
+                          me->JumpTo(me->GetHomePosition());
+                          // me->SetReactState(REACT_PASSIVE);
                       }
                     }
                     break;
