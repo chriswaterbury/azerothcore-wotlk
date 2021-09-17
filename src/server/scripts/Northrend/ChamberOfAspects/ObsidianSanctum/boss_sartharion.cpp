@@ -610,7 +610,7 @@ public:
             uint8 curLavaSide = urand(0,1);
 
             // Send curLavaSide from left
-            if (leftSide == 1)
+            if (curLavaSide == 1)
             {
                 for (uint8 i = 0; i < MAX_LEFT_LAVA_TSUNAMIS; ++i)
                 {

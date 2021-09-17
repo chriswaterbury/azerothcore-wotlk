@@ -179,8 +179,11 @@ public:
                     events.RepeatEvent(22000);
                     break;
                 case EVENT_MORTAL_WOUND:
-                    if (me->GetVictim()->GetAuraCount(SPELL_MORTAL_WOUND) < RAID_MODE(5,7)) {
-                      me->CastSpell(me->GetVictim(), SPELL_MORTAL_WOUND, false);
+                    {
+                      uint32 maxStacks = RAID_MODE(5,7)
+                      if (me->GetVictim()->GetAuraCount(SPELL_MORTAL_WOUND) < maxStacks) {
+                        me->CastSpell(me->GetVictim(), SPELL_MORTAL_WOUND, false);
+                      }
                     }
                     events.RepeatEvent(10000);
                     break;
