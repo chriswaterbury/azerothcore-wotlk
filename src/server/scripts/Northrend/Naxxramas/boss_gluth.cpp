@@ -179,8 +179,7 @@ public:
                     events.RepeatEvent(22000);
                     break;
                 case EVENT_MORTAL_WOUND:
-                    uint32 count = me->GetVictim()->GetAuraCount(SPELL_MORTAL_WOUND);
-                    if (count < RAID_MODE(5,7)) {
+                    if (me->GetVictim()->GetAuraCount(SPELL_MORTAL_WOUND) < RAID_MODE(5,7)) {
                       me->CastSpell(me->GetVictim(), SPELL_MORTAL_WOUND, false);
                     }
                     events.RepeatEvent(10000);
@@ -203,7 +202,7 @@ public:
                             }
                             else
                             {
-                                me->SummonCreature(NPC_ZOMBIE_CHOW, zombiePos[urand(0, 1)]);
+                                me->SummonCreature(NPC_ZOMBIE_CHOW, zombiePos[urand(0, 2)]);
                             }
                         }
                         events.RepeatEvent(10000);

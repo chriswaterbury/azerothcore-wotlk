@@ -436,7 +436,6 @@ public:
                     {
                         me->CastSpell(me, SPELL_TELEPORT_LIVE, false);
                     }
-                    me->getThreatMgr().resetAggro(NotOnSameSide(me));
                     if (Unit* pTarget = SelectTarget(SELECT_TARGET_NEAREST, 0))
                     {
                         me->getThreatMgr().addThreat(pTarget, 100.0f);
@@ -471,7 +470,7 @@ public:
                         me->SetReactState(REACT_AGGRESSIVE);
                         me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_DISABLE_MOVE);
                         me->RemoveAllAuras();
-                        me->resetAggro();
+                        me->getThreatMgr().resetAggro(NotOnSameSide(me));
                         summons.DoZoneInCombat();
                         events.ScheduleEvent(EVENT_SHADOW_BOLT, 1000);
                         events.ScheduleEvent(EVENT_HARVEST_SOUL, urand(5000, 15000));
