@@ -179,7 +179,10 @@ public:
                     events.RepeatEvent(22000);
                     break;
                 case EVENT_MORTAL_WOUND:
-                    me->CastSpell(me->GetVictim(), SPELL_MORTAL_WOUND, false);
+                    uint32 count = me->GetVictim()->GetAuraCount(SPELL_MORTAL_WOUND);
+                    if (count < RAID_MODE(5,7)) {
+                      me->CastSpell(me->GetVictim(), SPELL_MORTAL_WOUND, false);
+                    }
                     events.RepeatEvent(10000);
                     break;
                 case EVENT_DECIMATE:
@@ -189,7 +192,6 @@ public:
                     break;
                 case EVENT_SUMMON_ZOMBIE:
                     {
-                        uint8 rand = urand(0, 2);
                         for (int32 i = 0; i < RAID_MODE(1, 2); ++i)
                         {
                             // In 10 man raid, normal mode - should spawn only from mid gate
@@ -201,9 +203,8 @@ public:
                             }
                             else
                             {
-                                me->SummonCreature(NPC_ZOMBIE_CHOW, zombiePos[urand(0, 2)]);
+                                me->SummonCreature(NPC_ZOMBIE_CHOW, zombiePos[urand(0, 1)]);
                             }
-                            (rand == 2 ? rand = 0 : rand++);
                         }
                         events.RepeatEvent(10000);
                         break;

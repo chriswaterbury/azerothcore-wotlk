@@ -607,8 +607,10 @@ public:
             extraEvents.ScheduleEvent(EVENT_SARTHARION_START_LAVA, 2000);
             extraEvents.ScheduleEvent(EVENT_SARTHARION_FINISH_LAVA, 9000);
 
-            // Send wave from left
-            if (lastLavaSide == LAVA_RIGHT_SIDE)
+            uint8 curLavaSide = urand(0,1);
+
+            // Send curLavaSide from left
+            if (leftSide == 1)
             {
                 for (uint8 i = 0; i < MAX_LEFT_LAVA_TSUNAMIS; ++i)
                 {
