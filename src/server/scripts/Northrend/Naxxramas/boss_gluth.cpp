@@ -180,7 +180,7 @@ public:
                     break;
                 case EVENT_MORTAL_WOUND:
                     {
-                      uint32 maxStacks = RAID_MODE(5,7)
+                      uint32 maxStacks = RAID_MODE(5,7);
                       if (me->GetVictim()->GetAuraCount(SPELL_MORTAL_WOUND) < maxStacks) {
                         me->CastSpell(me->GetVictim(), SPELL_MORTAL_WOUND, false);
                       }
