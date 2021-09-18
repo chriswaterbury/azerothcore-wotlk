@@ -84,9 +84,9 @@ public:
         void SummonedCreatureDespawn(Creature* cr) override
         {
             if (me->IsInCombat()) {
-              Creature* cr = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
-              cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(2,5));
-              cr->SetHealth(cr->GetMaxHealth());
+              Creature* newCr = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
+              newCr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(2,5));
+              newCr->SetHealth(cr->GetHealth());
               summons.Summon(cr);
               summons.DoZoneInCombat();
             }
