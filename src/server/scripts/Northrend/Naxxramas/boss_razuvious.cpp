@@ -62,8 +62,13 @@ public:
 
         void SpawnHelpers()
         {
-            me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
-            me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2758.24f, -3110.97f, 267.685f, 3.94f);
+            Creature* cr;
+            cr = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
+            cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(2,5));
+            cr->SetHealth(cr->GetMaxHealth());
+            cr = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2758.24f, -3110.97f, 267.685f, 3.94f);
+            cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(2,5));
+            cr->SetHealth(cr->GetMaxHealth());
             // if (Is25ManRaid())
             // {
             //     me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2782.45f, -3088.03f, 267.685f, 0.75f);
@@ -74,14 +79,14 @@ public:
         void JustSummoned(Creature* cr) override
         {
             summons.Summon(cr);
-            cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(2,5));
-            cr->SetHealth(cr->GetMaxHealth());
         }
 
         void SummonedCreatureDespawn(Creature* cr) override
         {
             if (me->IsInCombat()) {
-              me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
+              Creature* cr = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
+              cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(2,5));
+              cr->SetHealth(cr->GetMaxHealth());
             }
         }
 
