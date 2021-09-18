@@ -1437,6 +1437,8 @@ public:
             {
                 me->SetDisableGravity(false);
                 me->SendMovementFlagUpdate();
+                me->SetMaxHealth(100000);
+                me->SetHealth(100000);
             }
             else if (pass && pass->GetTypeId() == TYPEID_PLAYER && me->IsAlive())
             {
