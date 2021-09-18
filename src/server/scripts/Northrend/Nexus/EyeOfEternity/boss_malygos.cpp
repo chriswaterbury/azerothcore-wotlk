@@ -721,8 +721,6 @@ public:
                                         c->setFaction(pPlayer->getFaction());
                                         //pPlayer->CastCustomSpell(60683, SPELLVALUE_BASE_POINT0, 1, c, true);
                                         c->m_Events.AddEvent(new EoEDrakeEnterVehicleEvent(*c, pPlayer->GetGUID()), c->m_Events.CalculateTime(500));
-                                        c->SetMaxHealth(100000);
-                                        c->SetHealth(100000);
                                         AttackStart(c);
                                     }
                                 }
@@ -759,7 +757,7 @@ public:
                     break;
                 case EVENT_SPELL_PH3_SURGE_OF_POWER:
                     me->CastSpell((Unit*)nullptr, SPELL_PH3_SURGE_OF_POWER, false);
-                    events.RepeatEvent(7000);
+                    events.RepeatEvent(12000);
                     break;
             }
 
