@@ -76,7 +76,7 @@ public:
             summons.Summon(cr);
         }
 
-        void SummonedCreatureDespawn() override
+        void SummonedCreatureDespawn(Creature* cr) override
         {
             if (me->IsInCombat()) {
               summons.Summon(cr);
