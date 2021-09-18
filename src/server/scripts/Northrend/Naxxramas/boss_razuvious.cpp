@@ -74,12 +74,14 @@ public:
         void JustSummoned(Creature* cr) override
         {
             summons.Summon(cr);
+            cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(2,5));
+            cr->SetHealth(cr->GetMaxHealth());
         }
 
         void SummonedCreatureDespawn(Creature* cr) override
         {
             if (me->IsInCombat()) {
-              summons.Summon(cr);
+              me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
             }
         }
 
