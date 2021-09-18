@@ -711,21 +711,21 @@ public:
                     break;
                 case EVENT_THORIM_LIGHTNING_ORB:
                     {
-                        if (GetArenaPlayer())
-                        {
-                            // Player found, repeat and return
-                            events.RepeatEvent(5000);
-                            return;
-                        }
+                        events.RepeatEvent(5000);
+                        return;
+                        // if (GetArenaPlayer())
+                        // {
+                        //     // Player found, repeat and return
+                        // }
 
                         // No players found
-                        me->MonsterYell("Failures! Weaklings!", LANG_UNIVERSAL, 0);
-                        me->PlayDirectSound(SOUND_AWIPE);
-                        me->SummonCreature(NPC_LIGHTNING_ORB, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ());
+                        // me->MonsterYell("Failures! Weaklings!", LANG_UNIVERSAL, 0);
+                        // me->PlayDirectSound(SOUND_AWIPE);
+                        // me->SummonCreature(NPC_LIGHTNING_ORB, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ());
 
-                        _isArenaEmpty = true;
-                        events.CancelEvent(EVENT_THORIM_NOT_REACH_IN_TIME);
-                        break;
+                        // _isArenaEmpty = true;
+                        // events.CancelEvent(EVENT_THORIM_NOT_REACH_IN_TIME);
+                        // break;
                     }
                 case EVENT_THORIM_NOT_REACH_IN_TIME:
                     _isArenaEmpty = true;
@@ -735,7 +735,7 @@ public:
                     break;
                 case EVENT_THORIM_FILL_ARENA:
                     SpawnArenaNPCs();
-                    events.RepeatEvent(10000);
+                    events.RepeatEvent(RAID_MODE(25000,15000));
                     PlaySpecial();
                     break;
                 case EVENT_THORIM_UNBALANCING_STRIKE:

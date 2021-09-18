@@ -168,8 +168,8 @@ enum Phases
     PHASE_THREE
 };
 
-#define MAX_NEXUS_LORDS                 DUNGEON_MODE(2, 4)
-#define MAX_SCIONS_OF_ETERNITY          DUNGEON_MODE(4, 8)
+#define MAX_NEXUS_LORDS                 DUNGEON_MODE(2, 3)
+#define MAX_SCIONS_OF_ETERNITY          DUNGEON_MODE(2, 3)
 #define AREA_EYE_OF_ETERNITY            4500
 
 enum MalygosLightOverrides
