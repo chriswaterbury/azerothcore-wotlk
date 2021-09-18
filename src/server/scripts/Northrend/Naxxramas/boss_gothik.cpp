@@ -388,9 +388,9 @@ public:
         }
 
         void SummonScaledCreature(uint32 id, float x, float y, float z, float ang = 0) {
-            Creature* cr = me->SummonCreature(NPC_DEAD_HORSE, PosSummonDead[pos].GetPositionX(), PosSummonDead[pos].GetPositionY(), PosSummonDead[pos].GetPositionZ(), PosSummonDead[pos].GetOrientation());
+            Creature* cr = me->SummonCreature(id, x, y, z, ang);
             if (Is25ManRaid()) {
-                cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(1,1.5));
+                cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(1,2));
                 cr->SetHealth(cr->GetMaxHealth());
             }
         }
