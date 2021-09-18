@@ -166,7 +166,7 @@ public:
                     if (dkTwo && !dkTwo->IsInCombat()) {
                       dkTwo = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2758.24f, -3110.97f, 267.685f, 3.94f);
                     }
-                    events.repeatEvent(5000);
+                    events.RepeatEvent(5000);
                     break;
             }
             DoMeleeAttackIfReady();
