@@ -59,13 +59,11 @@ public:
         EventMap events;
         SummonList summons;
         InstanceScript* pInstance;
-        Creature* dkOne;
-        Creature* dkTwo;
 
         void SpawnHelpers()
         {
-            dkOne = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
-            dkTwo = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2758.24f, -3110.97f, 267.685f, 3.94f);
+            me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
+            me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2758.24f, -3110.97f, 267.685f, 3.94f);
             // if (Is25ManRaid())
             // {
             //     me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2782.45f, -3088.03f, 267.685f, 0.75f);
@@ -76,6 +74,13 @@ public:
         void JustSummoned(Creature* cr) override
         {
             summons.Summon(cr);
+        }
+
+        void SummonedCreatureDespawn() override
+        {
+            if (me->IsInCombat()) {
+              summons.Summon(cr);
+            }
         }
 
         void Reset() override
@@ -129,7 +134,7 @@ public:
             events.ScheduleEvent(EVENT_UNBALANCING_STRIKE, 20000);
             events.ScheduleEvent(EVENT_DISRUPTING_SHOUT, 15000);
             events.ScheduleEvent(EVENT_JAGGED_KNIFE, 10000);
-            events.ScheduleEvent(EVENT_CHECK_FOR_DKS, 5000);
+            // events.ScheduleEvent(EVENT_CHECK_FOR_DKS, 5000);
             summons.DoZoneInCombat();
         }
 
@@ -159,15 +164,15 @@ public:
                     }
                     events.RepeatEvent(10000);
                     break;
-                case EVENT_CHECK_FOR_DKS:
-                    if (dkOne && !dkOne->IsInCombat()) {
-                      dkOne = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
-                    }
-                    if (dkTwo && !dkTwo->IsInCombat()) {
-                      dkTwo = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2758.24f, -3110.97f, 267.685f, 3.94f);
-                    }
-                    events.RepeatEvent(5000);
-                    break;
+                // case EVENT_CHECK_FOR_DKS:
+                //     if (dkOne && !dkOne->Is)) {
+                //       dkOne = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
+                //     }
+                //     if (dkTwo && !dkTwo->IsInCombat()) {
+                //       dkTwo = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2758.24f, -3110.97f, 267.685f, 3.94f);
+                //     }
+                //     events.RepeatEvent(5000);
+                //     break;
             }
             DoMeleeAttackIfReady();
         }
