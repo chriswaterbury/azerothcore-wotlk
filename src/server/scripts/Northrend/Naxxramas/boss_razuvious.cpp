@@ -87,7 +87,7 @@ public:
               Creature* newCr = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
               newCr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(2,5));
               newCr->SetHealth(cr->GetHealth());
-              summons.Summon(cr);
+              summons.Summon(newCr);
               summons.DoZoneInCombat();
             }
         }
