@@ -64,10 +64,10 @@ public:
         {
             Creature* cr;
             cr = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
-            cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(2,5));
+            cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(3,8));
             cr->SetHealth(cr->GetMaxHealth());
             cr = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2758.24f, -3110.97f, 267.685f, 3.94f);
-            cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(2,5));
+            cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(3,8));
             cr->SetHealth(cr->GetMaxHealth());
             // if (Is25ManRaid())
             // {
