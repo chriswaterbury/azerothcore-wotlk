@@ -160,10 +160,10 @@ public:
                     events.RepeatEvent(10000);
                     break;
                 case EVENT_CHECK_FOR_DKS:
-                    if (dkOne && !dkOne->isSpawned()) {
+                    if (dkOne && !dkOne->IsInCombat()) {
                       dkOne = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
                     }
-                    if (dkTwon && !dkTown->isSpawned()) {
+                    if (dkTwon && !dkTown->IsInCombat()) {
                       dkTwo = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2758.24f, -3110.97f, 267.685f, 3.94f);
                     }
                     events.repeatEvent(5000);
