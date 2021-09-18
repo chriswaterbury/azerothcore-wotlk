@@ -721,6 +721,8 @@ public:
                                         c->setFaction(pPlayer->getFaction());
                                         //pPlayer->CastCustomSpell(60683, SPELLVALUE_BASE_POINT0, 1, c, true);
                                         c->m_Events.AddEvent(new EoEDrakeEnterVehicleEvent(*c, pPlayer->GetGUID()), c->m_Events.CalculateTime(500));
+                                        c->SetMaxHealth(100000);
+                                        c->SetHealth(100000);
                                         AttackStart(c);
                                     }
                                 }
@@ -1437,8 +1439,6 @@ public:
             {
                 me->SetDisableGravity(false);
                 me->SendMovementFlagUpdate();
-                me->SetMaxHealth(100000);
-                me->SetHealth(100000);
             }
             else if (pass && pass->GetTypeId() == TYPEID_PLAYER && me->IsAlive())
             {
