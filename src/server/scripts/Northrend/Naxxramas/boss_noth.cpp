@@ -116,7 +116,6 @@ public:
             for (uint8 i = 0; i < count; ++i)
             {
                 Creature* cr = me->SummonCreature(entry, summoningPosition[urand(0, 4)]);
-                cr->
                 cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(1,5));
                 cr->SetHealth(cr->GetMaxHealth());
             }
