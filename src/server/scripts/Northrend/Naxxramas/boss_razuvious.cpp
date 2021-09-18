@@ -29,7 +29,8 @@ enum Events
 {
     EVENT_UNBALANCING_STRIKE        = 1,
     EVENT_DISRUPTING_SHOUT          = 2,
-    EVENT_JAGGED_KNIFE              = 3
+    EVENT_JAGGED_KNIFE              = 3,
+    EVENT_CHECK_FOR_DKS             = 4
 };
 
 enum Misc
@@ -58,16 +59,18 @@ public:
         EventMap events;
         SummonList summons;
         InstanceScript* pInstance;
+        Creature* dkOne;
+        Creature* dkTwo;
 
         void SpawnHelpers()
         {
-            me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
-            me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2758.24f, -3110.97f, 267.685f, 3.94f);
-            if (Is25ManRaid())
-            {
-                me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2782.45f, -3088.03f, 267.685f, 0.75f);
-                me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2778.56f, -3113.74f, 267.685f, 5.28f);
-            }
+            dkOne = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
+            dkTwo = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2758.24f, -3110.97f, 267.685f, 3.94f);
+            // if (Is25ManRaid())
+            // {
+            //     me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2782.45f, -3088.03f, 267.685f, 0.75f);
+            //     me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2778.56f, -3113.74f, 267.685f, 5.28f);
+            // }
         }
 
         void JustSummoned(Creature* cr) override
@@ -126,6 +129,7 @@ public:
             events.ScheduleEvent(EVENT_UNBALANCING_STRIKE, 20000);
             events.ScheduleEvent(EVENT_DISRUPTING_SHOUT, 15000);
             events.ScheduleEvent(EVENT_JAGGED_KNIFE, 10000);
+            events.ScheduleEvent(EVENT_CHECK_FOR_DKS, 5000);
             summons.DoZoneInCombat();
         }
 
@@ -154,6 +158,15 @@ public:
                         me->CastSpell(target, SPELL_JAGGED_KNIFE, false);
                     }
                     events.RepeatEvent(10000);
+                    break;
+                case EVENT_CHECK_FOR_DKS:
+                    if (dkOne && !dkOne->isSpawned()) {
+                      dkOne = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
+                    }
+                    if (dkTwon && !dkTown->isSpawned()) {
+                      dkTwo = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2758.24f, -3110.97f, 267.685f, 3.94f);
+                    }
+                    events.repeatEvent(5000);
                     break;
             }
             DoMeleeAttackIfReady();
