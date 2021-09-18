@@ -201,11 +201,11 @@ public:
                             // In 25 man raid - should spawn from all 3 gates
                             if (me->GetMap()->GetDifficulty() == RAID_DIFFICULTY_10MAN_NORMAL)
                             {
-                                me->SummonCreature(NPC_ZOMBIE_CHOW, zombiePos[0]);
+                                me->SummonCreature(NPC_ZOMBIE_CHOW, zombiePos[2]);
                             }
                             else
                             {
-                                me->SummonCreature(NPC_ZOMBIE_CHOW, zombiePos[urand(0, 2)]);
+                                me->SummonCreature(NPC_ZOMBIE_CHOW, zombiePos[i == 0 ? 0 : 2]);
                             }
                         }
                         events.RepeatEvent(10000);
