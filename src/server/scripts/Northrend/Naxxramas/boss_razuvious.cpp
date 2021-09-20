@@ -64,11 +64,7 @@ public:
         {
             Creature* cr;
             cr = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
-            cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(2,5));
-            cr->SetHealth(cr->GetMaxHealth());
             cr = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2758.24f, -3110.97f, 267.685f, 3.94f);
-            cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(2,5));
-            cr->SetHealth(cr->GetMaxHealth());
             // if (Is25ManRaid())
             // {
             //     me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2782.45f, -3088.03f, 267.685f, 0.75f);
@@ -85,7 +81,6 @@ public:
         {
             if (me->IsInCombat()) {
               Creature* newCr = me->SummonCreature(NPC_DEATH_KNIGHT_UNDERSTUDY, 2762.23f, -3085.07f, 267.685f, 1.95f);
-              newCr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(2,5));
               newCr->SetHealth(cr->GetHealth());
               summons.Summon(newCr);
               summons.DoZoneInCombat();

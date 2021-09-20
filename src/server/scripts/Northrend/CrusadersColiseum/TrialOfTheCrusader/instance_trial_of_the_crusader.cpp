@@ -1060,10 +1060,9 @@ public:
                             }
                             vHealerEntries.erase(vHealerEntries.begin() + pos);
                         }
-
-                        if( instance->GetSpawnMode() == RAID_DIFFICULTY_10MAN_NORMAL || instance->GetSpawnMode() == RAID_DIFFICULTY_10MAN_HEROIC )
-                            for( uint8 i = 0; i < 4; ++i )
-                                vOtherEntries.erase(vOtherEntries.begin() + urand(0, vOtherEntries.size() - 1));
+                        
+                        for( uint8 i = 0; i < 4; ++i )
+                            vOtherEntries.erase(vOtherEntries.begin() + urand(0, vOtherEntries.size() - 1));
 
                         for( std::vector<uint32>::iterator itr = vHealerEntries.begin(); itr != vHealerEntries.end(); ++itr )
                             vOtherEntries.push_back(*itr);
