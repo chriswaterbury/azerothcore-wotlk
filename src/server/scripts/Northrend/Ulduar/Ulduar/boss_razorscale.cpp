@@ -436,8 +436,6 @@ public:
                             if( npc_entry )
                                 if (Creature* c = SummonScaledCreature(npc_entry, x, y, 391.1f, j * M_PI / 2, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000)) {
                                     DoZoneInCombat(c);
-                                    c->SetMaxHealth(c->GetMaxHealth()*RAID_MODE(1,3));
-                                    c->SetHealth(c->GetMaxHealth());
                                 }
                         }
                     }
