@@ -410,9 +410,9 @@ struct ScriptedAI : public CreatureAI
         return cr;
     }
 
-    Creature* SummonScaledCreature(uint32 id, Position pos, TempSummonType spwtype = TEMPSUMMON_MANUAL_DESPAWN, uint32 despwtime = 0, SummonPropertiesEntry const* properties = nullptr) const
+    Creature* SummonScaledCreature(uint32 id, Position pos, TempSummonType spwtype = TEMPSUMMON_MANUAL_DESPAWN, uint32 despwtime = 0, uint32 vehId = 0, SummonPropertiesEntry const* properties = nullptr) const
     {
-        Creature* cr = me->SummonCreature(id, pos, spwtype, despwtime, properties);
+        Creature* cr = me->SummonCreature(id, pos, spwtype, despwtime, vehId, properties);
         if (Is25ManRaid()) {
             cr->SetMaxHealth(cr->GetMaxHealth()*3);
             cr->SetHealth(cr->GetMaxHealth());
