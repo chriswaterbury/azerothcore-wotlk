@@ -141,11 +141,10 @@ public:
             return 0;
         }
 
-        Creature* SummonScaledCreature(uint32 id, float x, float y, float z, float ang = 0) {
+        void SummonScaledCreature(uint32 id, float x, float y, float z, float ang = 0) {
             Creature* cr = me->SummonCreature(id, x, y, z, ang);
             cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(1,3));
             cr->SetHealth(cr->GetMaxHealth());
-            return cr;
         }
 
         void JustSummoned(Creature* cr) override
@@ -379,7 +378,7 @@ public:
 
             if (_feralEssenceStack)
             {
-                if (Creature* cr = SummonScaledCreature(NPC_SEEPING_FERAL_ESSENCE, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0.0f))
+                if (Creature* cr = me->SummonCreature(NPC_SEEPING_FERAL_ESSENCE, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0.0f))
                     summons.Summon(cr);
 
                 --_feralEssenceStack;
