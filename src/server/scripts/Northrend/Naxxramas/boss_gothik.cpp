@@ -387,14 +387,6 @@ public:
             me->HandleEmoteCommand(EMOTE_ONESHOT_SPELL_CAST);
         }
 
-        void SummonScaledCreature(uint32 id, float x, float y, float z, float ang = 0) {
-            Creature* cr = me->SummonCreature(id, x, y, z, ang);
-            if (Is25ManRaid()) {
-                cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(1,1));
-                cr->SetHealth(cr->GetMaxHealth());
-            }
-        }
-
         void DamageTaken(Unit*, uint32& damage, DamageEffectType, SpellSchoolMask) override
         {
             if (!secondPhase)

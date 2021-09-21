@@ -402,14 +402,6 @@ public:
             SummonScaledCreature(NPC_SIF, 2147.86f, -301.2f, 438.246f, 2.488f);
         }
 
-        void SummonScaledCreature(uint32 id, float x, float y, float z, float ang = 0) {
-            Creature* cr = me->SummonCreature(id, x, y, z, ang);
-            if (Is25ManRaid()) {
-                cr->SetMaxHealth(cr->GetMaxHealth()*3);
-                cr->SetHealth(cr->GetMaxHealth());
-            }
-        }
-
         void CloseDoors()
         {
             GameObject* go;
@@ -903,7 +895,7 @@ public:
                     events.RepeatEvent(13000);
                     return;
                 case EVENT_SIF_BLIZZARD:
-                    SummonScaledCreature(NPC_SIF_BLIZZARD, 2108.7f, -280.04f, 419.42f, 0, TEMPSUMMON_TIMED_DESPAWN, 30000);
+                    me->SummonCreature(NPC_SIF_BLIZZARD, 2108.7f, -280.04f, 419.42f, 0, TEMPSUMMON_TIMED_DESPAWN, 30000);
                     events.RepeatEvent(30000);
                     return;
                 case EVENT_SIF_FROST_NOVA_START:

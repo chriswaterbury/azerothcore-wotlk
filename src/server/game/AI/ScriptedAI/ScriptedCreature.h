@@ -400,6 +400,16 @@ struct ScriptedAI : public CreatureAI
 
     Player* SelectTargetFromPlayerList(float maxdist, uint32 excludeAura = 0, bool mustBeInLOS = false) const;
 
+    Creature* SummonScaledCreature(uint32 id, float x, float y, float z, float ang = 0, TempSummonType spwtype = TEMPSUMMON_MANUAL_DESPAWN, uint32 despwtime = 0, SummonPropertiesEntry const* properties = nullptr) const
+    {
+        Creature* cr = me->SummonCreature(id, x, y, z, ang);
+        if (Is25ManRaid()) {
+            cr->SetMaxHealth(cr->GetMaxHealth()*3);
+            cr->SetHealth(cr->GetMaxHealth());
+        }
+        return cr;
+    }
+
 private:
     Difficulty _difficulty;
     uint32 _evadeCheckCooldown;

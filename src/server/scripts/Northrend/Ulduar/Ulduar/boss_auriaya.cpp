@@ -141,12 +141,6 @@ public:
             return 0;
         }
 
-        void SummonScaledCreature(uint32 id, float x, float y, float z, float ang = 0) {
-            Creature* cr = me->SummonCreature(id, x, y, z, ang);
-            cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(1,3));
-            cr->SetHealth(cr->GetMaxHealth());
-        }
-
         void JustSummoned(Creature* cr) override
         {
             if (cr->GetEntry() == NPC_SANCTUM_SENTRY)
