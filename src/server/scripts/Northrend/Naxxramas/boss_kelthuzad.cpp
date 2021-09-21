@@ -412,9 +412,9 @@ public:
                     events.RepeatEvent(45000);
                     break;
                 case EVENT_CHAINS:
-                    for (uint8 i = 0; i < 3; ++i)
+                    for (uint8 i = 0; i < 1; ++i)
                     {
-                        if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1, 200, true, -SPELL_CHAINS_OF_KELTHUZAD))
+                        if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM_NON_HEALER, 1, 200, true, -SPELL_CHAINS_OF_KELTHUZAD))
                         {
                             me->CastSpell(target, SPELL_CHAINS_OF_KELTHUZAD, true);
                         }

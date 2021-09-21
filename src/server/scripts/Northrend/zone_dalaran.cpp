@@ -566,7 +566,7 @@ public:
                         if (Player* player = SelectTargetInDalaran())
                         {
                             me->NearTeleportTo(player->GetPositionX(), player->GetPositionY(), player->GetPositionZ(), 0.0f);
-                            DoCast(player, SPELL_MANABONKED);
+                            // DoCast(player, SPELL_MANABONKED);
                             SendMailToPlayer(player);
                         }
                         events.ScheduleEvent(EVENT_BLINK, 3 * IN_MILLISECONDS);
