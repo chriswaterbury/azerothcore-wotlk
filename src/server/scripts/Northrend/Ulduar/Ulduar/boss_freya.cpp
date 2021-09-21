@@ -387,16 +387,16 @@ public:
             {
                 me->MonsterYell("Children, assist me!", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_TRIO);
-                me->SummonCreature(NPC_ANCIENT_WATER_SPIRIT, me->GetPositionX() + urand(5, 15), me->GetPositionY() + urand(5, 15), me->GetMapHeight(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ()));
-                me->SummonCreature(NPC_STORM_LASHER, me->GetPositionX() + urand(5, 15), me->GetPositionY() + urand(5, 15), me->GetMapHeight(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ()));
-                me->SummonCreature(NPC_SNAPLASHER, me->GetPositionX() + urand(5, 15), me->GetPositionY() + urand(5, 15), me->GetMapHeight(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ()));
+                SummonScaledCreature(NPC_ANCIENT_WATER_SPIRIT, me->GetPositionX() + urand(5, 15), me->GetPositionY() + urand(5, 15), me->GetMapHeight(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ()));
+                SummonScaledCreaturee(NPC_STORM_LASHER, me->GetPositionX() + urand(5, 15), me->GetPositionY() + urand(5, 15), me->GetMapHeight(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ()));
+                SummonScaledCreature(NPC_SNAPLASHER, me->GetPositionX() + urand(5, 15), me->GetPositionY() + urand(5, 15), me->GetMapHeight(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ()));
             }
             // Ancient Conservator
             else if (_waveNumber == 2)
             {
                 me->MonsterYell("Eonar, your servant requires aid!", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_CONSERVATOR);
-                me->SummonCreature(NPC_ANCIENT_CONSERVATOR, me->GetPositionX() + urand(5, 15), me->GetPositionY() + urand(5, 15), me->GetMapHeight(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ()), 0, TEMPSUMMON_CORPSE_DESPAWN);
+                SummonScaledCreature(NPC_ANCIENT_CONSERVATOR, me->GetPositionX() + urand(5, 15), me->GetPositionY() + urand(5, 15), me->GetMapHeight(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ()), 0, TEMPSUMMON_CORPSE_DESPAWN);
             }
             // Detonating Lashers
             else if (_waveNumber == 3)
@@ -404,7 +404,7 @@ public:
                 me->MonsterYell("The swarm of the elements shall overtake you!", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_DETONATING);
                 for (uint8 i = 0; i < 10; ++i)
-                    me->SummonCreature(NPC_DETONATING_LASHER, me->GetPositionX() + urand(5, 20), me->GetPositionY() + urand(5, 20), me->GetMapHeight(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ()), 0, TEMPSUMMON_CORPSE_DESPAWN);
+                    SummonScaledCreature(NPC_DETONATING_LASHER, me->GetPositionX() + urand(5, 20), me->GetPositionY() + urand(5, 20), me->GetMapHeight(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ()), 0, TEMPSUMMON_CORPSE_DESPAWN);
             }
         }
 

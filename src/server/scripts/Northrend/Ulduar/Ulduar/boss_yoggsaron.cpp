@@ -1058,7 +1058,7 @@ public:
             uint32 dist = urand(38, 48);
             float o = rand_norm() * M_PI * 2;
             float Zplus = (dist - 38) / 6.5f;
-            me->SummonCreature(NPC_IMMORTAL_GUARDIAN, me->GetPositionX() + dist * cos(o), me->GetPositionY() + dist * sin(o), 327.2 + Zplus, 0, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
+            SummonScaledCreature(NPC_IMMORTAL_GUARDIAN, me->GetPositionX() + dist * cos(o), me->GetPositionY() + dist * sin(o), 327.2 + Zplus, 0, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
         }
 
         void JustDied(Unit*  /*who*/) override

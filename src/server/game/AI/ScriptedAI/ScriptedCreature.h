@@ -402,7 +402,7 @@ struct ScriptedAI : public CreatureAI
 
     Creature* SummonScaledCreature(uint32 id, float x, float y, float z, float ang = 0, TempSummonType spwtype = TEMPSUMMON_MANUAL_DESPAWN, uint32 despwtime = 0, SummonPropertiesEntry const* properties = nullptr) const
     {
-        Creature* cr = me->SummonCreature(id, x, y, z, ang);
+        Creature* cr = me->SummonCreature(id, x, y, z, ang, spwtype, despwtime, properties);
         if (Is25ManRaid()) {
             cr->SetMaxHealth(cr->GetMaxHealth()*3);
             cr->SetHealth(cr->GetMaxHealth());

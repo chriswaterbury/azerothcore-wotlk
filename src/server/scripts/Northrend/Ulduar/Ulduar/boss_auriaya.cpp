@@ -372,7 +372,7 @@ public:
 
             if (_feralEssenceStack)
             {
-                if (Creature* cr = me->SummonCreature(NPC_SEEPING_FERAL_ESSENCE, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0.0f))
+                if (Creature* cr = SummonScaledCreature(NPC_SEEPING_FERAL_ESSENCE, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0.0f))
                     summons.Summon(cr);
 
                 --_feralEssenceStack;
