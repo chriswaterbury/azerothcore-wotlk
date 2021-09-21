@@ -125,8 +125,8 @@ public:
             if (m_pInstance)
                 m_pInstance->SetData(TYPE_AURIAYA, NOT_STARTED);
 
-            for (uint8 i = 0; i < RAID_MODE(2, 4); ++i)
-                me->SummonCreature(NPC_SANCTUM_SENTRY, me->GetPositionX() + urand(4, 12), me->GetPositionY() + urand(4, 12), me->GetPositionZ());
+            for (uint8 i = 0; i < 2; ++i)
+                SummonScaledCreature(NPC_SANCTUM_SENTRY, me->GetPositionX() + urand(4, 12), me->GetPositionY() + urand(4, 12), me->GetPositionZ());
 
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_INTERRUPT_CAST, false);
         }
@@ -139,6 +139,13 @@ public:
                 return _nineLives;
 
             return 0;
+        }
+
+        Creature* SummonScaledCreature(uint32 id, float x, float y, float z, float ang = 0) {
+            Creature* cr = me->SummonCreature(id, x, y, z, ang);
+            cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(1,3));
+            cr->SetHealth(cr->GetMaxHealth());
+            return cr;
         }
 
         void JustSummoned(Creature* cr) override
@@ -372,7 +379,7 @@ public:
 
             if (_feralEssenceStack)
             {
-                if (Creature* cr = me->SummonCreature(NPC_SEEPING_FERAL_ESSENCE, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0.0f))
+                if (Creature* cr = SummonScaledCreature(NPC_SEEPING_FERAL_ESSENCE, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0.0f))
                     summons.Summon(cr);
 
                 --_feralEssenceStack;

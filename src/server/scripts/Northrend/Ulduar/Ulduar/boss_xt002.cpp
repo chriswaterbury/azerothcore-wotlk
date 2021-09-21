@@ -434,10 +434,17 @@ public:
 
         void SummonPiles()
         {
-            me->SummonCreature(NPC_PILE_TRIGGER, 893.290f, 66.820f, 409.81f, 4.2f);
-            me->SummonCreature(NPC_PILE_TRIGGER, 898.099f, -88.9115f, 409.887f, 2.23402f);
-            me->SummonCreature(NPC_PILE_TRIGGER, 793.096f, -95.158f,  409.887f, 0.855211f);
-            me->SummonCreature(NPC_PILE_TRIGGER, 794.600f, 59.660f, 409.82f, 5.34f);
+            SummonScaledCreature(NPC_PILE_TRIGGER, 893.290f, 66.820f, 409.81f, 4.2f);
+            SummonScaledCreature(NPC_PILE_TRIGGER, 898.099f, -88.9115f, 409.887f, 2.23402f);
+            SummonScaledCreature(NPC_PILE_TRIGGER, 793.096f, -95.158f,  409.887f, 0.855211f);
+            SummonScaledCreature(NPC_PILE_TRIGGER, 794.600f, 59.660f, 409.82f, 5.34f);
+        }
+
+        Creature* SummonScaledCreature(uint32 id, float x, float y, float z, float ang = 0) {
+            Creature* cr = me->SummonCreature(id, x, y, z, ang);
+            cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(1,3));
+            cr->SetHealth(cr->GetMaxHealth());
+            return cr;
         }
 
         void DoAction(int32 param) override
@@ -828,7 +835,7 @@ public:
     {
         npc_xt002_life_sparkAI(Creature* pCreature) : ScriptedAI(pCreature)
         {
-            me->SetMaxHealth(RAID_MODE(54000, 172000));
+            me->SetMaxHealth(RAID_MODE(27000, 36120)); // Unscaled me->SetMaxHealth(RAID_MODE(54000, 172000));
             me->SetHealth(me->GetMaxHealth());
             me->CastSpell(me, SPELL_SPARK_DAMAGE, true);
         }

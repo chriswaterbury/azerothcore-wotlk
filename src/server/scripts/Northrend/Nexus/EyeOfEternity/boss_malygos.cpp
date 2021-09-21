@@ -77,7 +77,7 @@ enum MalygosSpells
 
 #define SPELL_ARCANE_BREATH             DUNGEON_MODE(SPELL_ARCANE_BREATH_N, SPELL_ARCANE_BREATH_H)
 #define SPELL_ARCANE_STORM              DUNGEON_MODE(SPELL_ARCANE_STORM_N, SPELL_ARCANE_STORM_H)
-#define SPELL_PH3_SURGE_OF_POWER        DUNGEON_MODE(SPELL_PH3_SURGE_OF_POWER_N, SPELL_PH3_SURGE_OF_POWER_H)
+#define SPELL_PH3_SURGE_OF_POWER        SPELL_PH3_SURGE_OF_POWER_N
 
 enum MalygosEvents
 {
@@ -757,7 +757,7 @@ public:
                     break;
                 case EVENT_SPELL_PH3_SURGE_OF_POWER:
                     me->CastSpell((Unit*)nullptr, SPELL_PH3_SURGE_OF_POWER, false);
-                    events.RepeatEvent(12000);
+                    events.RepeatEvent(13000);
                     break;
             }
 

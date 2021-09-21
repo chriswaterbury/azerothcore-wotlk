@@ -513,7 +513,7 @@ public:
                             if( cnt < 8 )
                                 Helpers[cnt++] = h_p->GetGUID();
 
-                            if( Creature* c = h_p->SummonCreature(NPC_FLASH_FREEZE_NPC, h_p->GetPositionX(), h_p->GetPositionY(), h_p->GetPositionZ(), 0.0f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000) )
+                            if( Creature* c = SummonScaledCreature(h_p, NPC_FLASH_FREEZE_NPC, h_p->GetPositionX(), h_p->GetPositionY(), h_p->GetPositionZ(), 0.0f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000) )
                             {
                                 c->CastSpell(h_p, SPELL_FLASH_FREEZE_TRAPPED_NPC, true);
                                 JustSummoned(c);
@@ -521,6 +521,13 @@ public:
                         }
                     }
                 }
+        }
+
+        Creature* SummonScaledCreature(Creature* who, uint32 id, float x, float y, float z, float ang = 0) {
+            Creature* cr = who->SummonCreature(id, x, y, z, ang);
+            cr->SetMaxHealth(cr->GetMaxHealth()*RAID_MODE(1,3));
+            cr->SetHealth(cr->GetMaxHealth());
+            return cr;
         }
 
         void KilledUnit(Unit* who) override

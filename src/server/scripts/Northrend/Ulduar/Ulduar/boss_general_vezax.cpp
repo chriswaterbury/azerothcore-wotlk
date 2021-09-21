@@ -245,7 +245,8 @@ public:
                 case EVENT_SPELL_SEARING_FLAMES:
                     if(!me->HasAura(SPELL_SARONITE_BARRIER))
                         me->CastSpell(me->GetVictim(), SPELL_SEARING_FLAMES, false);
-                    events.RepeatEvent( me->GetMap()->Is25ManRaid() ? 8000 : 15000 );
+                    // Unscaled events.RepeatEvent( me->GetMap()->Is25ManRaid() ? 8000 : 15000 );
+                    events.RepeatEvent( me->GetMap()->Is25ManRaid() ? 12000 : 15000 );
                     break;
                 case EVENT_SPELL_SURGE_OF_DARKNESS:
                     me->MonsterYell(TEXT_VEZAX_SURGE, LANG_UNIVERSAL, 0);
@@ -270,7 +271,8 @@ public:
                                 }
 
                         Player* t = nullptr;
-                        if( outside.size() >= uint8(me->GetMap()->Is25ManRaid() ? 9 : 4) )
+                        // if( outside.size() >= uint8(me->GetMap()->Is25ManRaid() ? 9 : 4) )
+                        if( outside.size() >= uint8(4) )
                             t = outside.at(urand(0, outside.size() - 1));
                         else if( !inside.empty() )
                             t = inside.at(urand(0, inside.size() - 1));
