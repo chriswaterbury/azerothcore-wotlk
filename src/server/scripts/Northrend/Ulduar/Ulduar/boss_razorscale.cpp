@@ -363,7 +363,7 @@ public:
                 case EVENT_SUMMON_MOLE_MACHINES:
                     {
                         memset(cords, '\0', sizeof(cords));
-                        uint8 num = RAID_MODE( urand(2, 3), urand(2, 4) );
+                        uint8 num = urand(2, 3);
                         for( int i = 0; i < num; ++i )
                         {
                             // X: (550, 625) Y: (-185, -230)
@@ -532,12 +532,9 @@ public:
                     if (Unit* victim = me->GetVictim())
                         if (me->IsWithinMeleeRange(victim))
                         {
-                            me->CastSpell(victim, SPELL_FUSEARMOR, false);
                             if (Aura* aur = victim->GetAura(SPELL_FUSEARMOR))
-                                if (aur->GetStackAmount() == 5)
-                                    victim->CastSpell(victim, 64774, true);
-                            events.RepeatEvent(10000);
-                            break;
+                                if (aur->GetStackAmount() < 3)
+                                    me->CastSpell(victim, SPELL_FUSEARMOR, false);
                         }
                     events.RepeatEvent(2000);
                     break;

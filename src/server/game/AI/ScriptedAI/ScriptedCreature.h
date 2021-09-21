@@ -404,7 +404,8 @@ struct ScriptedAI : public CreatureAI
     {
         Creature* cr = me->SummonCreature(id, x, y, z, ang, spwtype, despwtime, properties);
         if (Is25ManRaid()) {
-            cr->SetMaxHealth(cr->GetMaxHealth()*3);
+            long double hp = cr->GetMaxHealth();
+            cr->SetMaxHealth(round(hp*2.5));
             cr->SetHealth(cr->GetMaxHealth());
         }
         return cr;
@@ -414,7 +415,8 @@ struct ScriptedAI : public CreatureAI
     {
         Creature* cr = me->SummonCreature(id, pos, spwtype, despwtime, vehId, properties);
         if (Is25ManRaid()) {
-            cr->SetMaxHealth(cr->GetMaxHealth()*3);
+            double hp = cr->GetMaxHealth();
+            cr->SetMaxHealth(round(hp*2.5));
             cr->SetHealth(cr->GetMaxHealth());
         }
         return cr;
