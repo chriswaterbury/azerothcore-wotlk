@@ -410,6 +410,16 @@ struct ScriptedAI : public CreatureAI
         return cr;
     }
 
+    Creature* SummonScaledCreature(uint32 id, Position pos, TempSummonType spwtype = TEMPSUMMON_MANUAL_DESPAWN, uint32 despwtime = 0, SummonPropertiesEntry const* properties = nullptr) const
+    {
+        Creature* cr = me->SummonCreature(id, pos, spwtype, despwtime, properties);
+        if (Is25ManRaid()) {
+            cr->SetMaxHealth(cr->GetMaxHealth()*3);
+            cr->SetHealth(cr->GetMaxHealth());
+        }
+        return cr;
+    }
+
 private:
     Difficulty _difficulty;
     uint32 _evadeCheckCooldown;
