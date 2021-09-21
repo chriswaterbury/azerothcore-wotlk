@@ -293,10 +293,10 @@ public:
             me->SetReactState(REACT_PASSIVE);
             me->CastSpell(me, SPELL_KELTHUZAD_CHANNEL, false);
             events.ScheduleEvent(EVENT_SPAWN_POOL, 5000);
-            events.ScheduleEvent(EVENT_SUMMON_SOLDIER, 6400);
-            events.ScheduleEvent(EVENT_SUMMON_UNSTOPPABLE_ABOMINATION, 10000);
-            events.ScheduleEvent(EVENT_SUMMON_SOUL_WEAVER, 12000);
-            events.ScheduleEvent(EVENT_PHASE_2, 228000);
+            events.ScheduleEvent(EVENT_SUMMON_SOLDIER, 2100);
+            events.ScheduleEvent(EVENT_SUMMON_UNSTOPPABLE_ABOMINATION, 6667);
+            events.ScheduleEvent(EVENT_SUMMON_SOUL_WEAVER, 8000);
+            events.ScheduleEvent(EVENT_PHASE_2, 114000);
             events.ScheduleEvent(EVENT_ENRAGE, 900000);
             if (pInstance)
             {
