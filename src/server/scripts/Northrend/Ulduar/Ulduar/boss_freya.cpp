@@ -388,7 +388,7 @@ public:
                 me->MonsterYell("Children, assist me!", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_TRIO);
                 SummonScaledCreature(NPC_ANCIENT_WATER_SPIRIT, me->GetPositionX() + urand(5, 15), me->GetPositionY() + urand(5, 15), me->GetMapHeight(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ()));
-                SummonScaledCreaturee(NPC_STORM_LASHER, me->GetPositionX() + urand(5, 15), me->GetPositionY() + urand(5, 15), me->GetMapHeight(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ()));
+                SummonScaledCreature(NPC_STORM_LASHER, me->GetPositionX() + urand(5, 15), me->GetPositionY() + urand(5, 15), me->GetMapHeight(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ()));
                 SummonScaledCreature(NPC_SNAPLASHER, me->GetPositionX() + urand(5, 15), me->GetPositionY() + urand(5, 15), me->GetMapHeight(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ()));
             }
             // Ancient Conservator
