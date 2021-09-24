@@ -1492,7 +1492,7 @@ public:
                 fadeArmorTimer = 0;
             }
 
-            DoMeleeAttackIfReady();
+            // DoMeleeAttackIfReady();
         }
 
     private:
