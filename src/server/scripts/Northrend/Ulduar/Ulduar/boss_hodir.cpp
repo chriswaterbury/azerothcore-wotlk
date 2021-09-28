@@ -516,9 +516,9 @@ public:
                             if( Creature* c = h_p->SummonCreature(NPC_FLASH_FREEZE_NPC, h_p->GetPositionX(), h_p->GetPositionY(), h_p->GetPositionZ(), 0.0f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000) )
                             {
                                 c->CastSpell(h_p, SPELL_FLASH_FREEZE_TRAPPED_NPC, true);
-                                c->SetMaxHealth(c->GetMaxHealth()*RAID_MODE(2,5));
-                                c->SetHealth(c->GetMaxHealth());
                                 JustSummoned(c);
+                                h_p->SetMaxHealth(h_p->GetMaxHealth()*RAID_MODE(2,5));
+                                h_p->SetHealth(h_p->GetMaxHealth());
                             }
                         }
                     }
