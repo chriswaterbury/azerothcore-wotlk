@@ -1411,21 +1411,11 @@ public:
                 {
                     float angle = (spinningUpOrientation * 2 * M_PI) / 100.0f;
                     me->SetFacingTo(angle);
-                    if (Unit* vehicle = me->GetVehicleBase())
-                    {
-                        vehicle->SetFacingTo(angle);
-                    }
 
                     spinningUpTimer = 0;
                 }
                 else
                 {
-                    float angle = (spinningUpOrientation * 2 * M_PI) / 100.0f;
-                    me->SetFacingTo(angle);
-                    if (Unit* vehicle = me->GetVehicleBase())
-                    {
-                        vehicle->SetFacingTo(angle);
-                    }
                     spinningUpTimer -= diff;
 
                 }
@@ -1521,13 +1511,13 @@ public:
                         {
                             vehicle->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_STATE_CUSTOM_SPELL_01);
                             vehicle->HandleEmoteCommand(EMOTE_STATE_CUSTOM_SPELL_01);
-                            // angle -= vehicle->GetOrientation();
-                            vehicle->SetFacingTo(angle);
+                            angle -= vehicle->GetOrientation();
                         }
 
                         spinningUpOrientation = (uint32)((angle * 100.0f) / (2 * M_PI));
                         spinningUpTimer = 1500;
-                        me->SetFacingTo(angle);
+                        // me->SetFacingTo(angle);
+                        me->SetFacingToObject(p);
                         
                         me->CastSpell(p, SPELL_SPINNING_UP, true);
 
