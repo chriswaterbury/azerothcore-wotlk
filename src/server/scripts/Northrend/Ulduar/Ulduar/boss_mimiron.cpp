@@ -1519,8 +1519,8 @@ public:
 
                         if (Unit* vehicle = me->GetVehicleBase())
                         {
-                            // vehicle->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_STATE_CUSTOM_SPELL_01);
-                            // vehicle->HandleEmoteCommand(EMOTE_STATE_CUSTOM_SPELL_01);
+                            vehicle->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_STATE_CUSTOM_SPELL_01);
+                            vehicle->HandleEmoteCommand(EMOTE_STATE_CUSTOM_SPELL_01);
                             angle -= vehicle->GetOrientation();
                         }
 
