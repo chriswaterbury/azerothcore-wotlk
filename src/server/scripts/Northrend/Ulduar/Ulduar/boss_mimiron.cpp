@@ -2223,7 +2223,7 @@ public:
                 lastMSTime = World::GetGameTimeMS();
                 lastOrientation = new_o;
                 c->SetFacingTo(new_o);
-                if (Unit* vehicle = me->GetVehicleBase())
+                if (Unit* vehicle = c->GetVehicleBase())
                 {
                     vehicle->SetFacingTo(new_o);
                 }
