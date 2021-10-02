@@ -39,7 +39,7 @@ enum AuriayaSpells
     SPELL_SEEPING_FERAL_ESSENCE_25      = 64676,
 };
 
-#define SPELL_SONIC_SCREECH             RAID_MODE(SPELL_SONIC_SCREECH_10, SPELL_SONIC_SCREECH_25)
+#define SPELL_SONIC_SCREECH             SPELL_SONIC_SCREECH_10
 #define SPELL_SENTINEL_BLAST            RAID_MODE(SPELL_SENTINEL_BLAST_10, SPELL_SENTINEL_BLAST_25)
 #define SPELL_SAVAGE_POUNCE             RAID_MODE(SPELL_SAVAGE_POUNCE_10, SPELL_SAVAGE_POUNCE_25)
 #define SPELL_RIP_FLESH                 RAID_MODE(SPELL_RIP_FLESH_10, SPELL_RIP_FLESH_25)
@@ -167,7 +167,7 @@ public:
             events.ScheduleEvent(EVENT_TERRIFYING_SCREECH, 35000);
             events.ScheduleEvent(EVENT_SONIC_SCREECH, 45000);
             events.ScheduleEvent(EVENT_GUARDIAN_SWARM, 70000);
-            events.ScheduleEvent(EVENT_SUMMON_FERAL_DEFENDER, 60000);
+            events.ScheduleEvent(EVENT_SUMMON_FERAL_DEFENDER, RAID_MODE(60000,75000));
             events.ScheduleEvent(EVENT_SENTINEL_BLAST, 36000);
             events.ScheduleEvent(EVENT_ENRAGE, 600000);
 
@@ -210,7 +210,7 @@ public:
         void DoAction(int32 param) override
         {
             if (param == ACTION_FERAL_DEATH_WITH_STACK)
-                events.ScheduleEvent(EVENT_RESPAWN_FERAL_DEFENDER, 25000);
+                events.ScheduleEvent(EVENT_RESPAWN_FERAL_DEFENDER, RAID_MODE(25000,30000));
             else if (param == ACTION_FERAL_DEATH)
                 _nineLives = true;
         }
