@@ -416,7 +416,7 @@ public:
             {
                 me->MonsterYell("The swarm of the elements shall overtake you!", LANG_UNIVERSAL, 0);
                 me->PlayDirectSound(SOUND_DETONATING);
-                for (uint8 i = 0; i < 10; ++i)
+                for (uint8 i = 0; i < RAID_MODE(7,10); ++i)
                     SummonScaledCreature(NPC_DETONATING_LASHER, me->GetPositionX() + urand(5, 20), me->GetPositionY() + urand(5, 20), me->GetMapHeight(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ()), 0, TEMPSUMMON_CORPSE_DESPAWN);
             }
         }
