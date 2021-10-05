@@ -1512,7 +1512,6 @@ public:
                     events.RepeatEvent(2250);
                     break;
                 case EVENT_SPELL_SPINNING_UP:
-                    events.CancelEvent(EVENT_HAND_PULSE);
                     events.RepeatEvent(45000);
                     if (Player* p = SelectTargetFromPlayerList(80.0f))
                     {
@@ -2206,11 +2205,13 @@ public:
 
         uint32 lastMSTime;
         float lastOrientation;
+        float prev_o;
 
         bool Load() override
         {
             lastMSTime = World::GetGameTimeMS();
             lastOrientation = -1.0f;
+            prev_o = -720.0;
             return true;
         }
 
@@ -2220,6 +2221,8 @@ public:
             {
                 if (c->GetTypeId() != TYPEID_UNIT)
                     return;
+                if (prev_o != -720.0)
+                    c->SetFacingTo(prev_o);
                 uint32 diff = getMSTimeDiff(lastMSTime, World::GetGameTimeMS());
                 if (lastOrientation == -1.0f)
                 {

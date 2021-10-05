@@ -259,7 +259,7 @@ public:
                     if(!me->HasAura(SPELL_SARONITE_BARRIER))
                         me->CastSpell(me->GetVictim(), SPELL_SEARING_FLAMES, false);
                     // Unscaled events.RepeatEvent( me->GetMap()->Is25ManRaid() ? 8000 : 15000 );
-                    events.RepeatEvent( me->GetMap()->Is25ManRaid() ? 12000 : 15000 );
+                    events.RepeatEvent(15000);
                     break;
                 case EVENT_SPELL_SURGE_OF_DARKNESS:
                     me->MonsterYell(TEXT_VEZAX_SURGE, LANG_UNIVERSAL, 0);
