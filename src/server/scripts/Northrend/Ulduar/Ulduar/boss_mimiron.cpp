@@ -1512,6 +1512,7 @@ public:
                     events.RepeatEvent(2250);
                     break;
                 case EVENT_SPELL_SPINNING_UP:
+                    events.CancelEvent(EVENT_HAND_PULSE);
                     events.RepeatEvent(45000);
                     if (Player* p = SelectTargetFromPlayerList(80.0f))
                     {
