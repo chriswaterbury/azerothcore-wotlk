@@ -234,6 +234,7 @@ enum ThorimEvents
     EVENT_SIF_BLIZZARD                      = 104,
     EVENT_SIF_FROST_NOVA_START              = 105,
     EVENT_SIF_FROST_NOVA_CAST               = 106,
+    EVENT_SIF_START_CASTING                 = 107,
 
     EVENT_DR_WARBRINGER_RS                  = 110,
 
@@ -906,6 +907,8 @@ public:
                 case EVENT_SIF_FROSTBOLT_VALLEY:
                     me->CastSpell(me, SPELL_FROSTBOLT_VALLEY, false);
                     events.RepeatEvent(13000);
+                    _allowCast = false;
+                    events.ScheduleEvent(EVENT_SIF_START_CASTING, 2000);
                     return;
                 case EVENT_SIF_BLIZZARD:
                     me->SummonCreature(NPC_SIF_BLIZZARD, 2108.7f, -280.04f, 419.42f, 0, TEMPSUMMON_TIMED_DESPAWN, 30000);
@@ -922,6 +925,8 @@ public:
                     _allowCast = true;
                     me->CastSpell(me, SPELL_FROST_NOVA, false);
                     return;
+                case EVENT_SIF_START_CASTING:
+                    _allowCast = true;
             }
 
             // has casting check before event select (return in events)
