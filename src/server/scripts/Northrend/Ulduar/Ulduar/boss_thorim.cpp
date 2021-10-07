@@ -49,8 +49,10 @@ enum ThorimSpells
     SPELL_TOUCH_OF_DOMINION                 = 62507,
     SPELL_SIF_TRANSFORM                     = 64778,
     SPELL_SIF_CHANNEL_HOLOGRAM              = 64324,
-    SPELL_FROSTBOLT                         = 62601,
-    SPELL_FROSTBOLT_VALLEY                  = 62604,
+    SPELL_FROSTBOLT_10                      = 62583,
+    SPELL_FROSTBOLT_25                      = 62601,
+    SPELL_FROSTBOLT_VALLEY_10               = 62580,
+    SPELL_FROSTBOLT_VALLEY_25               = 62604,
     SPELL_BLIZZARD_10                       = 62577,
     SPELL_BLIZZARD_25                       = 62603,
     SPELL_FROST_NOVA                        = 62605,
@@ -144,6 +146,8 @@ enum ThorimSpells
 #define SPELL_RUNIC_MENDING         RAID_MODE(SPELL_RUNIC_MENDING_10, SPELL_RUNIC_MENDING_25)
 #define SPELL_RUNIC_SHIELD          RAID_MODE(SPELL_RUNIC_SHIELD_10, SPELL_RUNIC_SHIELD_25)
 #define SPELL_CHAIN_LIGHTNING       RAID_MODE(SPELL_CHAIN_LIGHTNING_10, SPELL_CHAIN_LIGHTNING_25)
+#define SPELL_FROSTBOLT_VOLLEY      RAID_MODE(SPELL_FROSTBOLT_VALLEY_10,SPELL_FROSTBOLT_VALLEY_25)
+#define SPELL_FROSTBOLT             RAID_MODE(SPELL_FROSTBOLT_10,SPELL_FROSTBOLT_25)
 
 enum ThormNPCandGOs : uint32
 {
@@ -234,7 +238,6 @@ enum ThorimEvents
     EVENT_SIF_BLIZZARD                      = 104,
     EVENT_SIF_FROST_NOVA_START              = 105,
     EVENT_SIF_FROST_NOVA_CAST               = 106,
-    EVENT_SIF_FROSTBOLT_VALLEY_START        = 107,
 
     EVENT_DR_WARBRINGER_RS                  = 110,
 
@@ -905,14 +908,8 @@ public:
                     events.ScheduleEvent(EVENT_SIF_BLIZZARD, 15000);
                     break;
                 case EVENT_SIF_FROSTBOLT_VALLEY:
-                    me->CastSpell(me, SPELL_FROSTBOLT_VALLEY, false);
-                    _allowCast = true;
-                    return;
-                case EVENT_SIF_FROSTBOLT_VALLEY_START:
-                    events.DelayEvents(2000);
-                    events.ScheduleEvent(EVENT_SIF_FROSTBOLT_VALLEY, 2500);
+                    me->CastSpell(me, SPELL_FROSTBOLT_VOLLEY, false);
                     events.RepeatEvent(13000);
-                    _allowCast = false;
                     return;
                 case EVENT_SIF_BLIZZARD:
                     me->SummonCreature(NPC_SIF_BLIZZARD, 2108.7f, -280.04f, 419.42f, 0, TEMPSUMMON_TIMED_DESPAWN, 30000);
