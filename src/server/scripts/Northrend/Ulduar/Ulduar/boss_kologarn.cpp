@@ -690,8 +690,6 @@ public:
             targets.remove_if (StoneGripTargetSelector(GetCaster()->ToCreature(), GetCaster()->GetVictim()));
             // Maximum affected targets per difficulty mode
             uint32 maxTargets = 1;
-            if (GetSpellInfo()->Id == 63981)
-                maxTargets = 3;
 
             // Return a random amount of targets based on maxTargets
             while (maxTargets < targets.size())
