@@ -176,8 +176,10 @@ public:
             {
                 me->SetStandState(UNIT_STAND_STATE_STAND);
                 if (Unit* arm = ObjectAccessor::GetCreature(*me, _left))
+                    arm->SetOrientation(M_PI);
                     arm->CastSpell(arm, SPELL_ARM_RESPAWN_VISUAL, true);
                 if (Unit* arm = ObjectAccessor::GetCreature(*me, _right))
+                    arm->SetOrientation(M_PI);
                     arm->CastSpell(arm, SPELL_ARM_RESPAWN_VISUAL, true);
             }
 
