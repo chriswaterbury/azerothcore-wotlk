@@ -440,9 +440,9 @@ public:
                     if (!_right)
                         break;
 
-                    me->CastSpell(me, SPELL_STONE_GRIP, false);
                     Talk(SAY_GRAB_PLAYER);
                     Talk(EMOTE_STONE_GRIP);
+                    me->CastSpell(me, SPELL_STONE_GRIP, false);
                     return;
                 case EVENT_FOCUSED_EYEBEAM:
                 {
@@ -528,7 +528,7 @@ public:
             {
                 //who->ClearUnitState(UNIT_STATE_ONVEHICLE);
                 if (!_damageDone)
-                    _damageDone = RAID_MODE(80000, 380000);
+                    _damageDone = RAID_MODE(80000, 120000);
             }
         }
 
