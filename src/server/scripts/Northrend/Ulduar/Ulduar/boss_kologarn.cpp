@@ -175,12 +175,14 @@ public:
             if (who->GetTypeId() == TYPEID_PLAYER && me->GetExactDist2d(who) < 45.0f && me->getStandState() == UNIT_STAND_STATE_SUBMERGED)
             {
                 me->SetStandState(UNIT_STAND_STATE_STAND);
-                if (Unit* arm = ObjectAccessor::GetCreature(*me, _left))
+                if (Unit* arm = ObjectAccessor::GetCreature(*me, _left)) {
                     arm->SetOrientation(M_PI);
                     arm->CastSpell(arm, SPELL_ARM_RESPAWN_VISUAL, true);
-                if (Unit* arm = ObjectAccessor::GetCreature(*me, _right))
+                }
+                if (Unit* arm = ObjectAccessor::GetCreature(*me, _right)) {
                     arm->SetOrientation(M_PI);
                     arm->CastSpell(arm, SPELL_ARM_RESPAWN_VISUAL, true);
+                }
             }
 
             if (me->GetExactDist2d(who) < 30.0f)
