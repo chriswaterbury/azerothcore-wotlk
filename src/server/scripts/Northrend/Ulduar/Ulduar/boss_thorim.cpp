@@ -378,10 +378,10 @@ public:
         void SpawnHelpers()
         {
             // Spawn lightwells
-            for( uint8 i = 0; i < 3; ++i ) {
-                Creature* cr = me->SummonCreature(31883,Lightwells[0]);
-                cr->setFaction(1665);
-            }
+            // for( uint8 i = 0; i < 3; ++i ) {
+            //     Creature* cr = me->SummonCreature(31883,Lightwells[0]);
+            //     cr->setFaction(1665);
+            // }
         }
 
         GameObject* GetThorimObject(uint32 entry)
