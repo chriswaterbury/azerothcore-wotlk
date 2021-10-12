@@ -382,7 +382,7 @@ public:
             _hasSpawnedHelpers = true;
             // Spawn lightwells
             for( uint8 i = 0; i < 3; ++i ) {
-                who->SummonCreature(31883,Lightwells[i]);
+                who->SummonCreature(34686,Lightwells[i]);
             }
         }
 
