@@ -338,9 +338,7 @@ public:
 
         void DamageTaken(Unit* who, uint32& damage, DamageEffectType, SpellSchoolMask) override
         {
-            if (urand(0,5) > 3 && me->HasAura(65280)) {
-                who->SetAuraStack(65280,me,me->GetAuraCount(65280)+1);
-            }
+            who->SetAuraStack(65280,me,me->GetAuraCount(65280)+1);
 
             if (damage >= me->GetHealth() || me->GetHealth() < 150000)
             {
