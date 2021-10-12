@@ -381,42 +381,42 @@ public:
         void SpawnAllNPCs()
         {
             // Jormungar Behemoth 32882
-            SummonScaledCreature(NPC_JORMUNGAR_BEHEMOT, 2149.68f, -263.477f, 419.679f, 3.12102f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
+            me->SummonCreature(NPC_JORMUNGAR_BEHEMOT, 2149.68f, -263.477f, 419.679f, 3.12102f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
 
             // Captured Mercenary Soldier 32885
-            SummonScaledCreature(_isAlly ? NPC_CAPTURED_MERCENARY_SOLDIER_ALLY : NPC_CAPTURED_MERCENARY_SOLDIER_HORDE, 2127.24f, -251.309f, 419.793f, 5.89921f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
-            SummonScaledCreature(_isAlly ? NPC_CAPTURED_MERCENARY_SOLDIER_ALLY : NPC_CAPTURED_MERCENARY_SOLDIER_HORDE, 2120.1f, -258.99f, 419.764f, 6.24828f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
-            SummonScaledCreature(_isAlly ? NPC_CAPTURED_MERCENARY_SOLDIER_ALLY : NPC_CAPTURED_MERCENARY_SOLDIER_HORDE, 2123.32f, -254.771f, 419.789f, 6.17846f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
+            me->SummonCreature(_isAlly ? NPC_CAPTURED_MERCENARY_SOLDIER_ALLY : NPC_CAPTURED_MERCENARY_SOLDIER_HORDE, 2127.24f, -251.309f, 419.793f, 5.89921f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
+            me->SummonCreature(_isAlly ? NPC_CAPTURED_MERCENARY_SOLDIER_ALLY : NPC_CAPTURED_MERCENARY_SOLDIER_HORDE, 2120.1f, -258.99f, 419.764f, 6.24828f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
+            me->SummonCreature(_isAlly ? NPC_CAPTURED_MERCENARY_SOLDIER_ALLY : NPC_CAPTURED_MERCENARY_SOLDIER_HORDE, 2123.32f, -254.771f, 419.789f, 6.17846f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
 
             // Captured Mercenary Captain 32908
-            SummonScaledCreature(_isAlly ? NPC_CAPTURED_MERCENARY_CAPTAIN_ALLY : NPC_CAPTURED_MERCENARY_CAPTAIN_HORDE, 2131.31f, -259.182f, 419.974f, 5.91667f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
+            me->SummonCreature(_isAlly ? NPC_CAPTURED_MERCENARY_CAPTAIN_ALLY : NPC_CAPTURED_MERCENARY_CAPTAIN_HORDE, 2131.31f, -259.182f, 419.974f, 5.91667f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
 
             // Dark Rune Acolyte (arena) 32886
-            SummonScaledCreature(NPC_DARK_RUNE_ACOLYTE_I, 2129.09f, -277.142f, 419.756f, 1.22173f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
+            me->SummonCreature(NPC_DARK_RUNE_ACOLYTE_I, 2129.09f, -277.142f, 419.756f, 1.22173f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000);
 
             // Iron Ring Guard 32874
-            SummonScaledCreature(NPC_IRON_RING_GUARD, 2217.69f, -337.394f, 412.177f, 1.23918f);
-            SummonScaledCreature(NPC_IRON_RING_GUARD, 2218.38f, -297.505f, 412.176f, 1.02974f);
-            SummonScaledCreature(NPC_IRON_RING_GUARD, 2235.26f, -338.345f, 412.134f, 1.58979f);
-            SummonScaledCreature(NPC_IRON_RING_GUARD, 2235.07f, -297.985f, 412.134f, 1.61336f);
+            me->SummonCreature(NPC_IRON_RING_GUARD, 2217.69f, -337.394f, 412.177f, 1.23918f);
+            me->SummonCreature(NPC_IRON_RING_GUARD, 2218.38f, -297.505f, 412.176f, 1.02974f);
+            me->SummonCreature(NPC_IRON_RING_GUARD, 2235.26f, -338.345f, 412.134f, 1.58979f);
+            me->SummonCreature(NPC_IRON_RING_GUARD, 2235.07f, -297.985f, 412.134f, 1.61336f);
 
             // Dark Rune Acolyte (gauntlet) 33110
-            SummonScaledCreature(NPC_DARK_RUNE_ACOLYTE_G, 2198.29f, -436.92f, 419.985f, 0.261799f);
-            SummonScaledCreature(NPC_DARK_RUNE_ACOLYTE_G, 2227.58f, -308.303f, 412.134f, 1.59372f);
-            SummonScaledCreature(NPC_DARK_RUNE_ACOLYTE_G, 2227.47f, -345.375f, 412.134f, 1.56622f);
+            me->SummonCreature(NPC_DARK_RUNE_ACOLYTE_G, 2198.29f, -436.92f, 419.985f, 0.261799f);
+            me->SummonCreature(NPC_DARK_RUNE_ACOLYTE_G, 2227.58f, -308.303f, 412.134f, 1.59372f);
+            me->SummonCreature(NPC_DARK_RUNE_ACOLYTE_G, 2227.47f, -345.375f, 412.134f, 1.56622f);
 
             // Iron Honor Guard 32875
-            SummonScaledCreature(NPC_IRON_HONOR_GUARD, 2198.05f, -428.769f, 419.985f, 6.05629f);
-            SummonScaledCreature(NPC_IRON_HONOR_GUARD, 2220.31f, -436.22f, 412.26f, 1.06465f);
+            me->SummonCreature(NPC_IRON_HONOR_GUARD, 2198.05f, -428.769f, 419.985f, 6.05629f);
+            me->SummonCreature(NPC_IRON_HONOR_GUARD, 2220.31f, -436.22f, 412.26f, 1.06465f);
 
             // Runic Colossus 32872
-            SummonScaledCreature(NPC_RUNIC_COLOSSUS, 2227.5f, -396.179f, 412.176f, 1.79769f);
+            me->SummonCreature(NPC_RUNIC_COLOSSUS, 2227.5f, -396.179f, 412.176f, 1.79769f);
 
             // Ancient Rune Giant 32873
-            SummonScaledCreature(NPC_ANCIENT_RUNE_GIANT, 2134.57f, -440.318f, 438.331f, 0.226893f);
+            me->SummonCreature(NPC_ANCIENT_RUNE_GIANT, 2134.57f, -440.318f, 438.331f, 0.226893f);
 
             // Sif 33196
-            SummonScaledCreature(NPC_SIF, 2147.86f, -301.2f, 438.246f, 2.488f);
+            me->SummonCreature(NPC_SIF, 2147.86f, -301.2f, 438.246f, 2.488f);
         }
 
         void CloseDoors()
@@ -618,7 +618,7 @@ public:
             for (uint8 i = 0; i < (_spawnCommoners ? 7 : 2); ++i)
             {
                 rnd = urand(0, 13);
-                if ((cr = SummonScaledCreature((_spawnCommoners ? NPC_DARK_RUNE_COMMONER : RollTable[urand(0, 2)]), ArenaNPCs[rnd], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000)))
+                if ((cr = me->SummonCreature((_spawnCommoners ? NPC_DARK_RUNE_COMMONER : RollTable[urand(0, 2)]), ArenaNPCs[rnd], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000)))
                     cr->GetMotionMaster()->MoveJump(
                         Middle.GetPositionX() + urand(19, 24) * cos(Middle.GetAngle(cr)),
                         Middle.GetPositionY() + urand(19, 24) * sin(Middle.GetAngle(cr)),
@@ -1407,14 +1407,14 @@ public:
             events.ScheduleEvent(EVENT_RC_RUNIC_SMASH, 0);
             Creature* c;
 
-            if ((c = SummonScaledCreature(33140, 2221, -385, me->GetPositionZ())))
+            if ((c = me->SummonCreature(33140, 2221, -385, me->GetPositionZ())))
                 _triggerRightGUID[0] = c->GetGUID();
-            if ((c = SummonScaledCreature(33140, 2210, -385, me->GetPositionZ())))
+            if ((c = me->SummonCreature(33140, 2210, -385, me->GetPositionZ())))
                 _triggerRightGUID[1] = c->GetGUID();
 
-            if ((c = SummonScaledCreature(33141, 2235, -385, me->GetPositionZ())))
+            if ((c = me->SummonCreature(33141, 2235, -385, me->GetPositionZ())))
                 _triggerLeftGUID[0] = c->GetGUID();
-            if ((c = SummonScaledCreature(33141, 2246, -385, me->GetPositionZ())))
+            if ((c = me->SummonCreature(33141, 2246, -385, me->GetPositionZ())))
                 _triggerLeftGUID[1] = c->GetGUID();
         }
 
@@ -1587,7 +1587,7 @@ public:
                     events.RepeatEvent(8000);
                     break;
                 case EVENT_ARG_SPAWN:
-                    if (Creature* cr = SummonScaledCreature(NPC_IRON_HONOR_GUARD, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 20000))
+                    if (Creature* cr = me->SummonCreature(NPC_IRON_HONOR_GUARD, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 20000))
                         if (Unit* target = SelectTargetFromPlayerList(150.0f))
                             cr->AI()->AttackStart(target);
                     events.RepeatEvent(10000);
