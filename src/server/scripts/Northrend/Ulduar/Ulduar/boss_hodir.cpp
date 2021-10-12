@@ -340,6 +340,8 @@ public:
         {
             if (me->GetAuraCount(65280) && me->GetAuraCount(65280) < 30 && who->IsPlayer() && urand(0,20) > 19) {
                 who->SetAuraStack(65280,me,me->GetAuraCount(65280)+1);
+                // Aura* aura = me->GetAura(65280);
+                me->GetAura(65280)->RefreshDuration();
             }
 
             if (damage >= me->GetHealth() || me->GetHealth() < 150000)
