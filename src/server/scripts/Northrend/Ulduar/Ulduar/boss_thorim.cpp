@@ -271,7 +271,7 @@ const Position ArenaNPCs[] =
     {2087.46f, -298.71f, 440.5f,  0.59f}
 };
 
-const Position Lightwells[] =
+const float Lightwells[][4] =
 {
     {2208.94f, -394.179f, 412.134f, 6.205740f},
     {2144.5f, -423.41f, 438.25f, 4.740970f},
@@ -380,8 +380,7 @@ public:
         {
             // Spawn lightwells
             for( uint8 i = 0; i < 3; ++i ) {
-                Creature* cr = me->SummonCreature(34686,Lightwells[i]);
-                cr->setFaction(1665);
+                me->SummonGameObject(188598, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
             }
         }
 
