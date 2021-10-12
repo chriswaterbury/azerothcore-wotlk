@@ -274,7 +274,8 @@ const Position ArenaNPCs[] =
 const Position Lightwells[] =
 {
     {2208.94f, -394.179f, 412.134f, 6.205740f},
-    {2144.5f, -423.41f, 438.25f, 4.740970f}
+    {2144.5f, -423.41f, 438.25f, 4.740970f},
+    {2142.69f, -232.0f, 419.322f, 4.35f}
 };
 
 enum ThorimSounds
@@ -381,7 +382,7 @@ public:
             _hasSpawnedHelpers = true;
             // Spawn lightwells
             for( uint8 i = 0; i < 3; ++i ) {
-                who->SummonCreature(31883,Lightwells[0]);
+                who->SummonCreature(31883,Lightwells[i]);
             }
         }
 
