@@ -336,8 +336,12 @@ public:
             }
         }
 
-        void DamageTaken(Unit*, uint32& damage, DamageEffectType, SpellSchoolMask) override
+        void DamageTaken(Unit* who, uint32& damage, DamageEffectType, SpellSchoolMask) override
         {
+            if (urand(0,5) > 3 && me->HasAura(65280)) {
+                who->SetAuraStack(65280,me,me->GetAuraCount(65280)+1);
+            }
+
             if (damage >= me->GetHealth() || me->GetHealth() < 150000)
             {
                 damage = 0;
@@ -928,7 +932,7 @@ public:
                     if (me->GetPositionZ() < 433.0f) // ensure npc is on the ground
                     {
                         me->CastSpell(me, SPELL_DRUID_STARLIGHT_AREA_AURA, false);
-                        events.RepeatEvent(15000);
+                        events.RepeatEvent(10000);
                         break;
                     }
                     events.RepeatEvent(3000);
@@ -1079,7 +1083,7 @@ public:
         void ScheduleAbilities()
         {
             events.ScheduleEvent(EVENT_MAGE_FIREBALL, 3100);
-            events.ScheduleEvent(EVENT_MAGE_TOASTY_FIRE, 6000);
+            events.ScheduleEvent(EVENT_MAGE_TOASTY_FIRE, 0);
             events.ScheduleEvent(EVENT_MAGE_MELT_ICE, 1000);
         }
 
@@ -1124,7 +1128,7 @@ public:
                     break;
                 case EVENT_MAGE_TOASTY_FIRE:
                     me->CastSpell(me, SPELL_MAGE_CONJURE_TOASTY_FIRE, false);
-                    events.RepeatEvent(9000);
+                    events.RepeatEvent(4500);
                     break;
                 case EVENT_MAGE_MELT_ICE:
                     {

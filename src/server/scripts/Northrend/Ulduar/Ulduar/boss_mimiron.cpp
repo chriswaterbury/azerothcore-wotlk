@@ -1509,7 +1509,7 @@ public:
 
                         leftarm = !leftarm;
                     }
-                    events.RepeatEvent(2250);
+                    events.RepeatEvent(3000);
                     break;
                 case EVENT_SPELL_SPINNING_UP:
                     events.RepeatEvent(45000);

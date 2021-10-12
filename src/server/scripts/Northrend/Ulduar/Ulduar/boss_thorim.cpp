@@ -752,7 +752,7 @@ public:
                     break;
                 case EVENT_THORIM_FILL_ARENA:
                     SpawnArenaNPCs();
-                    events.RepeatEvent(RAID_MODE(25000,15000));
+                    events.RepeatEvent(25000); // RAID_MODE(25000,15000));
                     PlaySpecial();
                     break;
                 case EVENT_THORIM_UNBALANCING_STRIKE:
