@@ -474,7 +474,7 @@ public:
                     {
                         Talk(TEXT_EMOTE_BLOW);
                         Talk(TEXT_STALACTITE);
-                        me->CastSpell(me, Is25ManRaid()? SPELL_FROZEN_BLOWS_25 : SPELL_FROZEN_BLOWS_10, true);
+                        me->CastSpell(me, SPELL_FROZEN_BLOWS_10, true);
                     }
                     break;
                 case EVENT_FREEZE:
