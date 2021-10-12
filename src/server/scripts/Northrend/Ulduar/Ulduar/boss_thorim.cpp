@@ -350,6 +350,7 @@ public:
         bool _hardMode;
         bool _isHitAllowed;
         bool _isAlly;
+        bool _hasSpawnedHelpers;
         uint8 _trashCounter;
 
         InstanceScript* m_pInstance;
@@ -375,13 +376,13 @@ public:
             }
         }
 
-        void SpawnHelpers()
+        void SpawnHelpers(Player* who)
         {
+            _hasSpawnedHelpers = true;
             // Spawn lightwells
-            // for( uint8 i = 0; i < 3; ++i ) {
-            //     Creature* cr = me->SummonCreature(31883,Lightwells[0]);
-            //     cr->setFaction(1665);
-            // }
+            for( uint8 i = 0; i < 3; ++i ) {
+                who->SummonCreature(31883,Lightwells[0]);
+            }
         }
 
         GameObject* GetThorimObject(uint32 entry)
@@ -474,13 +475,13 @@ public:
             _hardMode = false;
             _isArenaEmpty = false;
             _hitByLightning = false;
+            _hasSpawnedHelpers = false;
 
             if (Player* t = SelectTargetFromPlayerList(1000))
                 if (t->GetTeamId() == TEAM_HORDE)
                     _isAlly = false;
 
             SpawnAllNPCs();
-            SpawnHelpers();
 
             CloseDoors();
             DisableThorim(false);
@@ -694,8 +695,12 @@ public:
             Map::PlayerList const& pList = me->GetMap()->GetPlayers();
             for(Map::PlayerList::const_iterator itr = pList.begin(); itr != pList.end(); ++itr)
                 if (Player* p = itr->GetSource())
-                    if (p->GetPositionX() > 2085 && p->GetPositionX() < 2185 && p->GetPositionY() < -214 && p->GetPositionY() > -305 && p->IsAlive() && p->GetPositionZ() < 425)
+                    if (p->GetPositionX() > 2085 && p->GetPositionX() < 2185 && p->GetPositionY() < -214 && p->GetPositionY() > -305 && p->IsAlive() && p->GetPositionZ() < 425) {
+                        if (!_hasSpawnedHelpers) {
+                            SpawnHelpers(p);
+                        }
                         return p;
+                    }
             return nullptr;
         }
 
