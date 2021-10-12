@@ -142,9 +142,9 @@ enum ThorimSpells
 #define SPELL_COLOSSUS_CHARGE       RAID_MODE(SPELL_COLOSSUS_CHARGE_10, SPELL_COLOSSUS_CHARGE_25)
 #define SPELL_STOMP                 RAID_MODE(SPELL_STOMP_10, SPELL_STOMP_25)
 #define SPELL_SHIELD_SMASH          RAID_MODE(SPELL_SHIELD_SMASH_10, SPELL_SHIELD_SMASH_25)
-#define SPELL_RUNIC_LIGHTNING       RAID_MODE(SPELL_RUNIC_LIGHTNING_10, SPELL_RUNIC_LIGHTNING_25)
-#define SPELL_RUNIC_MENDING         RAID_MODE(SPELL_RUNIC_MENDING_10, SPELL_RUNIC_MENDING_25)
-#define SPELL_RUNIC_SHIELD          RAID_MODE(SPELL_RUNIC_SHIELD_10, SPELL_RUNIC_SHIELD_25)
+#define SPELL_RUNIC_LIGHTNING       SPELL_RUNIC_LIGHTNING_10
+#define SPELL_RUNIC_MENDING         SPELL_RUNIC_MENDING_10
+#define SPELL_RUNIC_SHIELD          SPELL_RUNIC_SHIELD_10
 #define SPELL_CHAIN_LIGHTNING       RAID_MODE(SPELL_CHAIN_LIGHTNING_10, SPELL_CHAIN_LIGHTNING_25)
 #define SPELL_FROSTBOLT_VOLLEY      RAID_MODE(SPELL_FROSTBOLT_VALLEY_10,SPELL_FROSTBOLT_VALLEY_25)
 #define SPELL_FROSTBOLT             RAID_MODE(SPELL_FROSTBOLT_10,SPELL_FROSTBOLT_25)
@@ -271,6 +271,12 @@ const Position ArenaNPCs[] =
     {2087.46f, -298.71f, 440.5f,  0.59f}
 };
 
+const Position Lightwells[] =
+{
+    {2208.94f, -394.179f, 412.134f, 6.205740f},
+    {2144.5f, -423.41f, 438.25f, 4.740970f}
+};
+
 enum ThorimSounds
 {
     SOUND_AGGRO1                = 15733,
@@ -366,6 +372,15 @@ public:
                 me->DisableRotate(false);
                 me->ClearUnitState(UNIT_STATE_ROOT);
                 me->resetAttackTimer(BASE_ATTACK);
+            }
+        }
+
+        void SpawnHelpers()
+        {
+            // Spawn lightwells
+            for( uint8 i = 0; i < 3; ++i ) {
+                Creature* cr = me->SummonCreature(31883,Lightwells[0]);
+                cr->setFaction(1665);
             }
         }
 
@@ -465,6 +480,7 @@ public:
                     _isAlly = false;
 
             SpawnAllNPCs();
+            SpawnHelpers();
 
             CloseDoors();
             DisableThorim(false);
@@ -612,13 +628,21 @@ public:
         {
             Creature* cr;
             uint8 rnd;
+            bool evokerSummoned = false;
             if (_spawnCommoners || urand(0, 2))
                 _spawnCommoners = !_spawnCommoners;
 
             for (uint8 i = 0; i < (_spawnCommoners ? 7 : 2); ++i)
             {
                 rnd = urand(0, 13);
-                if ((cr = me->SummonCreature((_spawnCommoners ? NPC_DARK_RUNE_COMMONER : RollTable[urand(0, 2)]), ArenaNPCs[rnd], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000)))
+                uint32 npc = (_spawnCommoners ? NPC_DARK_RUNE_COMMONER : RollTable[urand(0, 2)]);
+                if (npc == RollTable[1]) {
+                    if (evokerSummoned) {
+                        npc = RollTable[urand(0, 1) ? 0 : 2];
+                    }
+                    evokerSummoned = true;
+                }
+                if ((cr = me->SummonCreature(npc, ArenaNPCs[rnd], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000)))
                     cr->GetMotionMaster()->MoveJump(
                         Middle.GetPositionX() + urand(19, 24) * cos(Middle.GetAngle(cr)),
                         Middle.GetPositionY() + urand(19, 24) * sin(Middle.GetAngle(cr)),
@@ -728,21 +752,21 @@ public:
                     break;
                 case EVENT_THORIM_LIGHTNING_ORB:
                     {
-                        events.RepeatEvent(5000);
-                        return;
-                        // if (GetArenaPlayer())
-                        // {
-                        //     // Player found, repeat and return
-                        // }
+                        if (GetArenaPlayer())
+                        {
+                            events.RepeatEvent(5000);
+                            return;
+                            // Player found, repeat and return
+                        }
 
                         // No players found
-                        // me->MonsterYell("Failures! Weaklings!", LANG_UNIVERSAL, 0);
-                        // me->PlayDirectSound(SOUND_AWIPE);
-                        // me->SummonCreature(NPC_LIGHTNING_ORB, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ());
+                        me->MonsterYell("Failures! Weaklings!", LANG_UNIVERSAL, 0);
+                        me->PlayDirectSound(SOUND_AWIPE);
+                        me->SummonCreature(NPC_LIGHTNING_ORB, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ());
 
-                        // _isArenaEmpty = true;
-                        // events.CancelEvent(EVENT_THORIM_NOT_REACH_IN_TIME);
-                        // break;
+                        _isArenaEmpty = true;
+                        events.CancelEvent(EVENT_THORIM_NOT_REACH_IN_TIME);
+                        break;
                     }
                 case EVENT_THORIM_NOT_REACH_IN_TIME:
                     _isArenaEmpty = true;
@@ -752,7 +776,7 @@ public:
                     break;
                 case EVENT_THORIM_FILL_ARENA:
                     SpawnArenaNPCs();
-                    events.RepeatEvent(25000); // RAID_MODE(25000,15000));
+                    events.RepeatEvent(RAID_MODE(25000,20000));
                     PlaySpecial();
                     break;
                 case EVENT_THORIM_UNBALANCING_STRIKE:
@@ -1298,7 +1322,7 @@ public:
         {
             if (me->GetEntry() == NPC_IRON_RING_GUARD)
             {
-                events.ScheduleEvent(EVENT_IR_GUARD_IMPALE, 12000);
+                events.ScheduleEvent(EVENT_IR_GUARD_IMPALE, 15000);
                 events.ScheduleEvent(EVENT_IR_GUARD_WHIRL, 5000);
             }
             else if (me->GetEntry() == NPC_DARK_RUNE_ACOLYTE_I)
@@ -1428,7 +1452,7 @@ public:
         void EnterCombat(Unit*) override
         {
             events.CancelEvent(EVENT_RC_RUNIC_SMASH);
-            events.ScheduleEvent(EVENT_RC_RUNIC_BARRIER, 10000);
+            events.ScheduleEvent(EVENT_RC_RUNIC_BARRIER, 15000);
             events.ScheduleEvent(EVENT_RC_SMASH, 18000);
             events.ScheduleEvent(EVENT_RC_CHARGE, 15000);
 
@@ -1496,7 +1520,7 @@ public:
                 case EVENT_RC_RUNIC_BARRIER:
                     me->CastSpell(me, SPELL_RUNIC_BARRIER, false);
                     me->MonsterTextEmote("Runic Colossus surrounds itself with a crackling Runic Barrier!", 0, true);
-                    events.RepeatEvent(20000);
+                    events.RepeatEvent(25000);
                     break;
                 case EVENT_RC_SMASH:
                     me->CastSpell(me->GetVictim(), SPELL_SMASH, false);

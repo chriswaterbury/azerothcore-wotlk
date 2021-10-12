@@ -139,7 +139,7 @@ public:
                 m_pInstance->SetData(TYPE_AURIAYA, NOT_STARTED);
 
             for (uint8 i = 0; i < 2; ++i)
-                SummonScaledCreature(NPC_SANCTUM_SENTRY, me->GetPositionX() + urand(4, 12), me->GetPositionY() + urand(4, 12), me->GetPositionZ());
+                me->SummonCreature(NPC_SANCTUM_SENTRY, me->GetPositionX() + urand(4, 12), me->GetPositionY() + urand(4, 12), me->GetPositionZ());
 
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_INTERRUPT_CAST, false);
         }
@@ -385,7 +385,7 @@ public:
 
             if (_feralEssenceStack)
             {
-                if (Creature* cr = SummonScaledCreature(NPC_SEEPING_FERAL_ESSENCE, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0.0f))
+                if (Creature* cr = me->SummonCreature(NPC_SEEPING_FERAL_ESSENCE, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0.0f))
                     summons.Summon(cr);
 
                 --_feralEssenceStack;
