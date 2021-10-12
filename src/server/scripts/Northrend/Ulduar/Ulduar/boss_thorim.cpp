@@ -475,7 +475,6 @@ public:
             _hardMode = false;
             _isArenaEmpty = false;
             _hitByLightning = false;
-            _hasSpawnedHelpers = false;
 
             if (Player* t = SelectTargetFromPlayerList(1000))
                 if (t->GetTeamId() == TEAM_HORDE)
