@@ -351,7 +351,6 @@ public:
         bool _hardMode;
         bool _isHitAllowed;
         bool _isAlly;
-        bool _hasSpawnedHelpers;
         uint8 _trashCounter;
 
         InstanceScript* m_pInstance;
@@ -377,12 +376,12 @@ public:
             }
         }
 
-        void SpawnHelpers(Player* who)
+        void SpawnHelpers()
         {
-            _hasSpawnedHelpers = true;
             // Spawn lightwells
             for( uint8 i = 0; i < 3; ++i ) {
-                who->SummonCreature(34686,Lightwells[i]);
+                Creature* cr = me->SummonCreature(34686,Lightwells[i]);
+                cr->setFaction(1665);
             }
         }
 
@@ -483,6 +482,7 @@ public:
                     _isAlly = false;
 
             SpawnAllNPCs();
+            SpawnHelpers();
 
             CloseDoors();
             DisableThorim(false);
@@ -696,12 +696,8 @@ public:
             Map::PlayerList const& pList = me->GetMap()->GetPlayers();
             for(Map::PlayerList::const_iterator itr = pList.begin(); itr != pList.end(); ++itr)
                 if (Player* p = itr->GetSource())
-                    if (p->GetPositionX() > 2085 && p->GetPositionX() < 2185 && p->GetPositionY() < -214 && p->GetPositionY() > -305 && p->IsAlive() && p->GetPositionZ() < 425) {
-                        if (!_hasSpawnedHelpers) {
-                            SpawnHelpers(p);
-                        }
+                    if (p->GetPositionX() > 2085 && p->GetPositionX() < 2185 && p->GetPositionY() < -214 && p->GetPositionY() > -305 && p->IsAlive() && p->GetPositionZ() < 425)
                         return p;
-                    }
             return nullptr;
         }
 
