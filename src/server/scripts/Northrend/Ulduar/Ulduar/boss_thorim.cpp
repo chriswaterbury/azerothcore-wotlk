@@ -357,7 +357,7 @@ public:
         InstanceScript* m_pInstance;
         EventMap events;
         SummonList summons;
-        GameObject* lightwells[3] = {
+        GameObject* lightwells[6] = {
             nullptr,
             nullptr,
             nullptr
@@ -390,8 +390,10 @@ public:
             for(Map::PlayerList::const_iterator itr = pList.begin(); itr != pList.end(); ++itr)
                 if (Player* p = itr->GetSource()) {
                     for( uint8 i = 0; i < 3; ++i ) {
-                        GameObject* go = p->SummonGameObject(501123, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
-                        lightwells[i] = go;
+                        GameObject* rip = p->SummonGameObject(501123, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
+                        lightwells[i] = rip;
+                        GameObject* regr = p->SummonGameObject(501124, Lightwells[i][0] + 5.0f, Lightwells[i][1] + 5.0f, Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
+                        lightwells[i+3] = regr;
                     }
                     break;
                 }
@@ -494,7 +496,7 @@ public:
                 if (t->GetTeamId() == TEAM_HORDE)
                     _isAlly = false;
 
-            for ( uint8 i = 0; i < 3; ++i) {
+            for ( uint8 i = 0; i < 6; ++i) {
                 if (lightwells[i])
                     if (GameObject* go = lightwells[i])
                         if (go->IsInWorld())
