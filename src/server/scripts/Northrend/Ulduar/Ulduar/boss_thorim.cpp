@@ -396,7 +396,7 @@ public:
             for(Map::PlayerList::const_iterator itr = pList.begin(); itr != pList.end(); ++itr)
                 if (Player* p = itr->GetSource()) {
                     for( uint8 i = 0; i < 3; ++i ) {
-                        GameObject* rip = p->SummonGameObject(501124, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
+                        GameObject* rip = p->SummonGameObject(501123, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
                         lightwells[i] = rip;
                         uint8 j = i + 3;
                         GameObject* regrowth = p->SummonGameObject(501124, Lightwells[j][0], Lightwells[j][1], Lightwells[j][2], Lightwells[j][3], 0, 0, 0, 0, 0);
