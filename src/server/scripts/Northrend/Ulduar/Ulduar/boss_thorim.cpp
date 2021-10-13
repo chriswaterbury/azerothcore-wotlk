@@ -481,13 +481,13 @@ public:
             _hitByLightning = false;
             _summonedLightwells = false;
 
-            for (uint8 i = 0; i < sizeof(lightwells); ++i) {
-                if (GameObject* go = lightwells[i]) {
-                    if (go->isSpawned()) {
-                        go->Delete();
-                    }
-                }
-            }
+            // for (uint8 i = 0; i < sizeof(lightwells); ++i) {
+            //     if (GameObject* go = lightwells[i]) {
+            //         if (go->isSpawned()) {
+            //             go->Delete();
+            //         }
+            //     }
+            // }
 
             if (Player* t = SelectTargetFromPlayerList(1000))
                 if (t->GetTeamId() == TEAM_HORDE)
