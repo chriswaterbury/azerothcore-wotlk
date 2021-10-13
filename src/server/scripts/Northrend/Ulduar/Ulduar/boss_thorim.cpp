@@ -351,7 +351,7 @@ public:
         bool _hardMode;
         bool _isHitAllowed;
         bool _isAlly;
-        bool _hasSpawnedHelpers;
+        bool _summonedLightwells;
         uint8 _trashCounter;
 
         InstanceScript* m_pInstance;
@@ -377,11 +377,18 @@ public:
             }
         }
 
-        void SpawnHelpers(Player* who)
+        void SpawnHelpers(Player* p)
         {
+            _summonedLightwells = true;
             // Spawn lightwells
             for( uint8 i = 0; i < 3; ++i ) {
-                Object* go = who->SummonGameObject(188598, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
+                uint8 j = 0;
+                while(j < 2) {
+                    GameObject* go = me->SummonGameObject(188598, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
+                    go->SetSpellId(j ? 61301 : 48443);
+                    go->SetOwnerGUID(p->GetGUID());
+                    ++j;
+                }
             }
         }
 
@@ -475,7 +482,7 @@ public:
             _hardMode = false;
             _isArenaEmpty = false;
             _hitByLightning = false;
-            _hasSpawnedHelpers = false;
+            _summonedLightwells = false;
 
             if (Player* t = SelectTargetFromPlayerList(1000))
                 if (t->GetTeamId() == TEAM_HORDE)
@@ -696,7 +703,7 @@ public:
             for(Map::PlayerList::const_iterator itr = pList.begin(); itr != pList.end(); ++itr)
                 if (Player* p = itr->GetSource())
                     if (p->GetPositionX() > 2085 && p->GetPositionX() < 2185 && p->GetPositionY() < -214 && p->GetPositionY() > -305 && p->IsAlive() && p->GetPositionZ() < 425) {
-                        if (!_hasSpawnedHelpers) {
+                        if (!_summonedLightwells) {
                             SpawnHelpers(p);
                         }
                         return p;
