@@ -275,7 +275,10 @@ const float Lightwells[][4] =
 {
     {2208.94f, -394.179f, 412.134f, 6.205740f},
     {2144.5f, -423.41f, 438.25f, 4.740970f},
-    {2142.69f, -232.0f, 419.322f, 4.35f}
+    {2142.69f, -232.0f, 419.322f, 4.35f},
+    {2212.94f, -394.179f, 412.134f, 6.205740f},
+    {2148.5f, -423.41f, 438.25f, 4.740970f},
+    {2146.69f, -232.0f, 419.322f, 4.35f}
 };
 
 enum ThorimSounds
@@ -360,6 +363,9 @@ public:
         GameObject* lightwells[6] = {
             nullptr,
             nullptr,
+            nullptr,
+            nullptr,
+            nullptr,
             nullptr
         };
 
@@ -392,8 +398,9 @@ public:
                     for( uint8 i = 0; i < 3; ++i ) {
                         GameObject* rip = p->SummonGameObject(501123, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
                         lightwells[i] = rip;
-                        GameObject* regr = p->SummonGameObject(501124, Lightwells[i][0] + 5.0f, Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
-                        lightwells[i+3] = regr;
+                        uint8 j = i + 3;
+                        GameObject* regrowth = p->SummonGameObject(501124, Lightwells[j][0], Lightwells[j][1], Lightwells[j][2], Lightwells[j][3], 0, 0, 0, 0, 0);
+                        lightwells[j] = regrowth;
                     }
                     break;
                 }
