@@ -390,9 +390,8 @@ public:
             for(Map::PlayerList::const_iterator itr = pList.begin(); itr != pList.end(); ++itr)
                 if (Player* p = itr->GetSource()) {
                     for( uint8 i = 0; i < 3; ++i ) {
-                        GameObject* go = p->SummonGameObject(188598, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
+                        GameObject* go = p->SummonGameObject(501123, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
                         lightwells[i] = go;
-                        go->SetSpellId(61301);
                     }
                     break;
                 }
