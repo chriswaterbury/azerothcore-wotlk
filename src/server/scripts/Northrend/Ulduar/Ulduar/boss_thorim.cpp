@@ -495,12 +495,12 @@ public:
                 if (t->GetTeamId() == TEAM_HORDE)
                     _isAlly = false;
 
-            for ( uint8 i = 0; i < sizeof(lightwells); ++i) {
-                if (lightwells[i])
-                    if (GameObject* go = lightwells[i])
-                        if (go->isSpawned())
-                            go->RemoveFromWorld();
-            }
+            // for ( uint8 i = 0; i < sizeof(lightwells); ++i) {
+            //     if (lightwells[i])
+            //         if (GameObject* go = lightwells[i])
+            //             if (go->isSpawned())
+            //                 go->RemoveFromWorld();
+            // }
 
             SpawnAllNPCs();
             SpawnHelpers();
