@@ -341,7 +341,7 @@ public:
             {
                 case EVENT_FUSION_PUNCH:
                     me->CastSpell(me->GetVictim(), SPELL_FUSION_PUNCH, false);
-                    events.RepeatEvent(urand(15000, 20000));
+                    events.RepeatEvent(urand(18000, 22000));
                     break;
                 case EVENT_STATIC_DISRUPTION:
                     if (Unit* pTarget = SelectTarget(SELECT_TARGET_FARTHEST, 0, 0, true))
