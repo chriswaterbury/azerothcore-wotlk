@@ -392,7 +392,7 @@ public:
                     for( uint8 i = 0; i < 3; ++i ) {
                         GameObject* rip = p->SummonGameObject(501123, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
                         lightwells[i] = rip;
-                        GameObject* regr = p->SummonGameObject(501124, Lightwells[i][0] + 5.0f, Lightwells[i][1] + 5.0f, Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
+                        GameObject* regr = p->SummonGameObject(501124, Lightwells[i][0] + 5.0f, Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
                         lightwells[i+3] = regr;
                     }
                     break;
