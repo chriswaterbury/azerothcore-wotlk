@@ -357,6 +357,7 @@ public:
         InstanceScript* m_pInstance;
         EventMap events;
         SummonList summons;
+        GameObject* lightwells[3];
 
         bool _hitByLightning;
 
@@ -382,13 +383,9 @@ public:
             _summonedLightwells = true;
             // Spawn lightwells
             for( uint8 i = 0; i < 3; ++i ) {
-                uint8 j = 0;
-                while(j < 2) {
-                    GameObject* go = me->SummonGameObject(188598, Lightwells[i][0] + 2*j, Lightwells[i][1] + 2*j, Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
-                    go->SetSpellId(j ? 61301 : 48443);
-                    go->SetOwnerGUID(p->GetGUID());
-                    ++j;
-                }
+                GameObject* go = p->SummonGameObject(188598, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
+                lightwells[i] = go;
+                go->SetSpellId(61301);
             }
         }
 
@@ -483,6 +480,14 @@ public:
             _isArenaEmpty = false;
             _hitByLightning = false;
             _summonedLightwells = false;
+
+            for (uint8 i = 0; i < sizeof(lightwells); ++i) {
+                if (GameObject* go = lightwells[i]) {
+                    if (go->isSpawned()) {
+                        go->Delete();
+                    }
+                }
+            }
 
             if (Player* t = SelectTargetFromPlayerList(1000))
                 if (t->GetTeamId() == TEAM_HORDE)
