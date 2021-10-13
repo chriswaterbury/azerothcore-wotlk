@@ -357,7 +357,7 @@ public:
         InstanceScript* m_pInstance;
         EventMap events;
         SummonList summons;
-        GameObject* lightwells[3];
+        GameObject* lightwells[3] = {};
 
         bool _hitByLightning;
 
