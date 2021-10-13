@@ -384,7 +384,7 @@ public:
             for( uint8 i = 0; i < 3; ++i ) {
                 uint8 j = 0;
                 while(j < 2) {
-                    GameObject* go = me->SummonGameObject(188598, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
+                    GameObject* go = me->SummonGameObject(188598, Lightwells[i][0] + 2*j, Lightwells[i][1] + 2*j, Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
                     go->SetSpellId(j ? 61301 : 48443);
                     go->SetOwnerGUID(p->GetGUID());
                     ++j;
