@@ -497,8 +497,8 @@ public:
             for ( uint8 i = 0; i < 3; ++i) {
                 if (lightwells[i])
                     if (GameObject* go = lightwells[i])
-                        if (go->isSpawned())
-                            go->Delete();
+                        if (go->IsInWorld())
+                            go->RemoveFromWorld();
             }
 
             SpawnAllNPCs();
