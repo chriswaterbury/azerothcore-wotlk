@@ -499,7 +499,7 @@ public:
                 if (lightwells[i])
                     if (GameObject* go = lightwells[i])
                         if (go->isSpawned())
-                            // go->Delete();
+                            go->Delete();
             }
 
             SpawnAllNPCs();
