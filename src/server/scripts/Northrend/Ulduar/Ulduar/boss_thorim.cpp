@@ -357,7 +357,11 @@ public:
         InstanceScript* m_pInstance;
         EventMap events;
         SummonList summons;
-        GameObject* lightwells[3] = {};
+        GameObject* lightwells[3] = {
+            nullptr,
+            nullptr,
+            nullptr
+        };
 
         bool _hitByLightning;
 
@@ -382,11 +386,17 @@ public:
         {
             _summonedLightwells = true;
             // Spawn lightwells
-            for( uint8 i = 0; i < 3; ++i ) {
-                GameObject* go = me->SummonGameObject(188598, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
-                lightwells[i] = go;
-                go->SetSpellId(61301);
-            }
+            Map::PlayerList const& pList = me->GetMap()->GetPlayers();
+            for(Map::PlayerList::const_iterator itr = pList.begin(); itr != pList.end(); ++itr)
+                if (Player* p = itr->GetSource()) {
+                    for( uint8 i = 0; i < 3; ++i ) {
+                        GameObject* go = p->SummonGameObject(188598, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
+                        lightwells[i] = go;
+                        go->SetSpellId(61301);
+                    }
+                    break;
+                }
+            
         }
 
         GameObject* GetThorimObject(uint32 entry)
@@ -484,6 +494,13 @@ public:
             if (Player* t = SelectTargetFromPlayerList(1000))
                 if (t->GetTeamId() == TEAM_HORDE)
                     _isAlly = false;
+
+            for ( uint8 i = 0; i < sizeof(lightwells); ++i) {
+                if (lightwells[i])
+                    if (GameObject* go = lightwells[i])
+                        if (go->isSpawned())
+                            go->RemoveFromWorld();
+            }
 
             SpawnAllNPCs();
             SpawnHelpers();
