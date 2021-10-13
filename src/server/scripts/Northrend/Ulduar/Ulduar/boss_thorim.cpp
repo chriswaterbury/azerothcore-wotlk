@@ -378,14 +378,14 @@ public:
             }
         }
 
-        void SpawnHelpers(Player* p)
+        void SpawnHelpers()
         {
             _summonedLightwells = true;
             // Spawn lightwells
             for( uint8 i = 0; i < 3; ++i ) {
-                GameObject* go = p->SummonGameObject(188598, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
+                GameObject* go = me->SummonGameObject(188598, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
                 lightwells[i] = go;
-                // go->SetSpellId(61301);
+                go->SetSpellId(61301);
             }
         }
 
@@ -481,19 +481,12 @@ public:
             _hitByLightning = false;
             _summonedLightwells = false;
 
-            // for (uint8 i = 0; i < sizeof(lightwells); ++i) {
-            //     if (GameObject* go = lightwells[i]) {
-            //         if (go->isSpawned()) {
-            //             go->Delete();
-            //         }
-            //     }
-            // }
-
             if (Player* t = SelectTargetFromPlayerList(1000))
                 if (t->GetTeamId() == TEAM_HORDE)
                     _isAlly = false;
 
             SpawnAllNPCs();
+            SpawnHelpers();
 
             CloseDoors();
             DisableThorim(false);
@@ -708,9 +701,9 @@ public:
             for(Map::PlayerList::const_iterator itr = pList.begin(); itr != pList.end(); ++itr)
                 if (Player* p = itr->GetSource())
                     if (p->GetPositionX() > 2085 && p->GetPositionX() < 2185 && p->GetPositionY() < -214 && p->GetPositionY() > -305 && p->IsAlive() && p->GetPositionZ() < 425) {
-                        if (!_summonedLightwells) {
-                            SpawnHelpers(p);
-                        }
+                        // if (!_summonedLightwells) {
+                        //     SpawnHelpers(p);
+                        // }
                         return p;
                     }
             return nullptr;
