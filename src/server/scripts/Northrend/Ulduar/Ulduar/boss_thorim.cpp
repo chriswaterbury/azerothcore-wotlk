@@ -385,7 +385,7 @@ public:
             for( uint8 i = 0; i < 3; ++i ) {
                 GameObject* go = p->SummonGameObject(188598, Lightwells[i][0], Lightwells[i][1], Lightwells[i][2], Lightwells[i][3], 0, 0, 0, 0, 0);
                 lightwells[i] = go;
-                go->SetSpellId(61301);
+                // go->SetSpellId(61301);
             }
         }
 
