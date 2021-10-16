@@ -275,13 +275,16 @@ public:
             {
                 case 1:
                     events.RescheduleEvent(EVENT_FUSION_PUNCH, 15000);
+                    me->SetAttackTime(BASE_ATTACK, 3000);
                     break;
                 case 2:
                     events.RescheduleEvent(EVENT_STATIC_DISRUPTION, 20000);
+                    me->SetAttackTime(BASE_ATTACK, 2250);
                     break;
                 case 3:
                     me->ResetLootMode();
                     events.RescheduleEvent(EVENT_OVERWHELMING_POWER, 8000);
+                    me->SetAttackTime(BASE_ATTACK, 1500);
                     break;
             }
         }
@@ -453,13 +456,16 @@ public:
                 case 1:
                     events.RescheduleEvent(EVENT_SHIELD_OF_RUNES, 20000);
                     events.RescheduleEvent(EVENT_RUNE_OF_POWER, 30000);
+                    me->SetAttackTime(BASE_ATTACK, 4000);
                     break;
                 case 2:
                     events.RescheduleEvent(EVENT_RUNE_OF_DEATH, 35000);
+                    me->SetAttackTime(BASE_ATTACK, 3000);
                     break;
                 case 3:
                     me->ResetLootMode();
                     events.RescheduleEvent(EVENT_RUNE_OF_SUMMONING, urand(20000, 30000));
+                    me->SetAttackTime(BASE_ATTACK, 2000);
                     break;
             }
         }
@@ -672,14 +678,17 @@ public:
                 case 1:
                     events.RescheduleEvent(EVENT_CHAIN_LIGHTNING, urand(9000, 17000));
                     events.RescheduleEvent(EVENT_OVERLOAD, urand(25000, 40000));
+                    me->SetAttackTime(BASE_ATTACK, 4000);
                     break;
                 case 2:
                     events.RescheduleEvent(EVENT_LIGHTNING_WHIRL, urand(20000, 40000));
+                    me->SetAttackTime(BASE_ATTACK, 3000);
                     break;
                 case 3:
                     me->ResetLootMode();
                     me->CastSpell(me, SPELL_STORMSHIELD, true);
                     events.RescheduleEvent(EVENT_LIGHTNING_TENDRILS, urand(15000, 16000));
+                    me->SetAttackTime(BASE_ATTACK, 2000);
                     break;
             }
         }
