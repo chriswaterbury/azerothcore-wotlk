@@ -657,28 +657,28 @@ public:
 
         void SpawnArenaNPCs()
         {
-            Creature* cr;
-            uint8 rnd;
-            bool evokerSummoned = false;
-            if (_spawnCommoners || urand(0, 2))
-                _spawnCommoners = !_spawnCommoners;
+            // Creature* cr;
+            // uint8 rnd;
+            // bool evokerSummoned = false;
+            // if (_spawnCommoners || urand(0, 2))
+            //     _spawnCommoners = !_spawnCommoners;
 
-            for (uint8 i = 0; i < (_spawnCommoners ? 7 : 2); ++i)
-            {
-                rnd = urand(0, 13);
-                uint32 npc = (_spawnCommoners ? NPC_DARK_RUNE_COMMONER : RollTable[urand(0, 2)]);
-                if (npc == RollTable[1]) {
-                    if (evokerSummoned) {
-                        npc = RollTable[urand(0, 1) ? 0 : 2];
-                    }
-                    evokerSummoned = true;
-                }
-                if ((cr = me->SummonCreature(npc, ArenaNPCs[rnd], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000)))
-                    cr->GetMotionMaster()->MoveJump(
-                        Middle.GetPositionX() + urand(19, 24) * cos(Middle.GetAngle(cr)),
-                        Middle.GetPositionY() + urand(19, 24) * sin(Middle.GetAngle(cr)),
-                        Middle.GetPositionZ(), 20, 20);
-            }
+            // for (uint8 i = 0; i < (_spawnCommoners ? 7 : 2); ++i)
+            // {
+            //     rnd = urand(0, 13);
+            //     uint32 npc = (_spawnCommoners ? NPC_DARK_RUNE_COMMONER : RollTable[urand(0, 2)]);
+            //     if (npc == RollTable[1]) {
+            //         if (evokerSummoned) {
+            //             npc = RollTable[urand(0, 1) ? 0 : 2];
+            //         }
+            //         evokerSummoned = true;
+            //     }
+            //     if ((cr = me->SummonCreature(npc, ArenaNPCs[rnd], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 5000)))
+            //         cr->GetMotionMaster()->MoveJump(
+            //             Middle.GetPositionX() + urand(19, 24) * cos(Middle.GetAngle(cr)),
+            //             Middle.GetPositionY() + urand(19, 24) * sin(Middle.GetAngle(cr)),
+            //             Middle.GetPositionZ(), 20, 20);
+            // }
         }
 
         void SpellHit(Unit* caster, const SpellInfo* spellInfo) override
