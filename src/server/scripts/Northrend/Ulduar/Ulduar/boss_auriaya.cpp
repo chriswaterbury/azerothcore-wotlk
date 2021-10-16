@@ -424,16 +424,22 @@ public:
 
             if (_feralRushTimer >= 6000)
             {
-                DoResetThreat();
+                
                 if (!UpdateVictim())
                     return;
 
-                me->CastSpell(me->GetVictim(), SPELL_FERAL_RUSH, true);
+                if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM_NON_HEALER, 1, 0, true))
+                {
+                    me->CastSpell(target, SPELL_FERAL_RUSH, true);
+                }
                 _feralRushTimer = 0;
             }
             else if (_feralPounceTimer >= 6000)
             {
-                me->CastSpell(me->GetVictim(), SPELL_FERAL_POUNCE, false);
+                if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM_NON_HEALER, 1, 0, true))
+                {
+                    me->CastSpell(target, SPELL_FERAL_POUNCE, false);
+                }
                 _feralPounceTimer = 0;
             }
 
