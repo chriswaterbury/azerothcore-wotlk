@@ -406,7 +406,7 @@ public:
                         uint8 opt;
                         uint8 r = urand(1, 100);
                         if( r <= 40 ) opt = 1;
-                        else if( r <= 85 ) opt = 2;
+                        else if( r <= 95 ) opt = 2;
                         else opt = 3;
 
                         for( int j = 0; j < 4; ++j )
