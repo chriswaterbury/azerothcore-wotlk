@@ -456,7 +456,7 @@ public:
                 case 1:
                     events.RescheduleEvent(EVENT_SHIELD_OF_RUNES, 20000);
                     events.RescheduleEvent(EVENT_RUNE_OF_POWER, 30000);
-                    me->SetAttackTime(BASE_ATTACK, 4000);
+                    me->SetAttackTime(BASE_ATTACK, 40000);
                     break;
                 case 2:
                     events.RescheduleEvent(EVENT_RUNE_OF_DEATH, 35000);
