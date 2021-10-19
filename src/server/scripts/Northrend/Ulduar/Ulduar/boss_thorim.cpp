@@ -801,7 +801,7 @@ public:
 
                         // _isArenaEmpty = true;
                         // events.CancelEvent(EVENT_THORIM_NOT_REACH_IN_TIME);
-                        // break;
+                        break;
                     }
                 case EVENT_THORIM_NOT_REACH_IN_TIME:
                     _isArenaEmpty = true;
